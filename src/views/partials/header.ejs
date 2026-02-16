@@ -1,0 +1,346 @@
+<header class="ae-header-wrapper">
+    <style>
+        /* Header-specific reset and scoped styles */
+        .ae-header-wrapper {
+            all: initial;
+            display: block;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .ae-header-wrapper * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .ae-header-container {
+            width: 100%;
+            height: 100px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .ae-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .ae-logo-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .ae-logo-link {
+            display: block;
+            height: 100%;
+            padding: 15px 0;
+            text-decoration: none;
+        }
+
+        .ae-logo-img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .ae-nav {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .ae-nav-list {
+            display: flex;
+            list-style: none;
+            gap: 50px;
+            align-items: center;
+            height: 100%;
+        }
+
+        .ae-nav-item {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .ae-nav-link {
+            color: #2c2c2c;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .ae-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #a94442;
+            transition: width 0.3s ease;
+        }
+
+        .ae-nav-link:hover {
+            color: #a94442;
+        }
+
+        .ae-nav-link:hover::after {
+            width: 100%;
+        }
+
+        .ae-nav-link.active {
+            color: #a94442;
+        }
+
+        .ae-nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Mobile menu button */
+        .ae-mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .ae-mobile-menu-btn span {
+            width: 28px;
+            height: 3px;
+            background-color: #2c2c2c;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .ae-mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .ae-mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .ae-mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .ae-header-content {
+                padding: 0 20px;
+            }
+
+            .ae-logo-link {
+                padding: 10px 0;
+            }
+
+            .ae-mobile-menu-btn {
+                display: flex;
+            }
+
+            .ae-nav {
+                position: fixed;
+                top: 100px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 100px);
+                background-color: #ffffff;
+                transition: left 0.3s ease;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .ae-nav.active {
+                left: 0;
+            }
+
+            .ae-nav-list {
+                flex-direction: column;
+                gap: 0;
+                padding: 30px 20px;
+                height: auto;
+            }
+
+            .ae-nav-item {
+                width: 100%;
+                height: auto;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .ae-nav-link {
+                display: block;
+                padding: 20px 15px;
+                font-size: 18px;
+            }
+
+            .ae-nav-link::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ae-header-container {
+                height: 80px;
+            }
+
+            .ae-nav {
+                top: 80px;
+                height: calc(100vh - 80px);
+            }
+
+            .ae-logo-link {
+                padding: 8px 0;
+            }
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+            box-shadow: 2px 2px 6px #666;
+        }
+
+        .whatsapp-icon-svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-icon-svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+
+    <div class="ae-header-container">
+        <div class="ae-header-content">
+            <div class="ae-logo-container">
+                <a href="/" class="ae-logo-link">
+                    <img src="/images/logo.png" alt="Astha Enterprises" class="ae-logo-img">
+                </a>
+            </div>
+
+            <button class="ae-mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="ae-nav">
+                <ul class="ae-nav-list">
+                    <li class="ae-nav-item">
+                        <a href="/" class="ae-nav-link">HOME</a>
+                    </li>
+                    <li class="ae-nav-item">
+                        <a href="/shop" class="ae-nav-link">COLLECTIONS</a>
+                    </li>
+                    <li class="ae-nav-item">
+                        <a href="/about" class="ae-nav-link">ABOUT</a>
+                    </li>
+                    <li class="ae-nav-item">
+                        <a href="/contact" class="ae-nav-link">CONTACT</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // Mobile menu toggle
+            const mobileBtn = document.querySelector('.ae-mobile-menu-btn');
+            const nav = document.querySelector('.ae-nav');
+
+            if (mobileBtn && nav) {
+                mobileBtn.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    nav.classList.toggle('active');
+                });
+            }
+
+            // Close mobile menu when clicking on a link
+            const navLinks = document.querySelectorAll('.ae-nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    if (mobileBtn && nav) {
+                        mobileBtn.classList.remove('active');
+                        nav.classList.remove('active');
+                    }
+                });
+            });
+
+            // Set active link based on current page
+            const currentPath = window.location.pathname;
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (currentPath === href || (currentPath === '/' && href === '/')) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Close mobile menu on window resize
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 768) {
+                    if (mobileBtn && nav) {
+                        mobileBtn.classList.remove('active');
+                        nav.classList.remove('active');
+                    }
+                }
+            });
+        })();
+    </script>
+    <a href="https://wa.me/919818926023?text=Hello%20I%20would%20like%20to%20make%20a%20bulk%20inquiry%20regarding%20your%20fabrics."
+        class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" class="whatsapp-icon-svg" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                fill="white" />
+        </svg>
+    </a>
+</header>

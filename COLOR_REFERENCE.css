@@ -1,0 +1,190 @@
+/* Quick Reference: CSS Variables for Admin Theme */
+
+/* ========================================
+   LIGHT MODE (Default)
+   ======================================== */
+:root {
+    /* Backgrounds */
+    --bg-primary: #ffffff;
+    /* Main background - Pure white */
+    --bg-secondary: #f5f5f5;
+    /* Secondary background - Light gray */
+    --bg-tertiary: #e8e8e8;
+    /* Tertiary background - Medium light gray */
+
+    /* Text Colors */
+    --text-primary: #2d1a1a;
+    /* Primary text - Dark blackish-red */
+    --text-secondary: #4a3333;
+    /* Secondary text - Medium blackish-red */
+    --text-tertiary: #6b4f4f;
+    /* Tertiary text - Light blackish-red */
+
+    /* Accent Colors */
+    --accent-primary: #8b2f2f;
+    /* Primary accent - Blackish-red */
+    --accent-secondary: #a64545;
+    /* Secondary accent - Lighter red */
+    --accent-hover: #6b2424;
+    /* Hover state - Darker red */
+
+    /* UI Elements */
+    --border-color: #d4a5a5;
+    /* Borders - Light red-tinted */
+    --shadow-color: rgba(139, 47, 47, 0.15);
+    /* Shadows - Subtle red */
+
+    /* Scrollbar */
+    --scrollbar-track: #f5f5f5;
+    /* Track - Light gray */
+    --scrollbar-thumb: #8b2f2f;
+    /* Thumb - Blackish-red */
+    --scrollbar-thumb-hover: #6b2424;
+    /* Thumb hover - Darker red */
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+[data-theme="dark"] {
+    /* Backgrounds */
+    --bg-primary: #000000;
+    /* Main background - Pure black */
+    --bg-secondary: #1a1a1a;
+    /* Secondary background - Very dark gray */
+    --bg-tertiary: #2a2a2a;
+    /* Tertiary background - Dark gray */
+
+    /* Text Colors */
+    --text-primary: #ffffff;
+    /* Primary text - Pure white */
+    --text-secondary: #e0e0e0;
+    /* Secondary text - Light gray */
+    --text-tertiary: #b0b0b0;
+    /* Tertiary text - Medium gray */
+
+    /* Accent Colors */
+    --accent-primary: #FFD700;
+    /* Primary accent - Gold */
+    --accent-secondary: #FFED4E;
+    /* Secondary accent - Light gold */
+    --accent-hover: #FFC700;
+    /* Hover state - Darker gold */
+
+    /* UI Elements */
+    --border-color: #FFD700;
+    /* Borders - Gold */
+    --shadow-color: rgba(255, 215, 0, 0.3);
+    /* Shadows - Gold glow */
+
+    /* Scrollbar */
+    --scrollbar-track: #1a1a1a;
+    /* Track - Very dark gray */
+    --scrollbar-thumb: #FFD700;
+    /* Thumb - Gold */
+    --scrollbar-thumb-hover: #FFED4E;
+    /* Thumb hover - Light gold */
+}
+
+/* ========================================
+   USAGE EXAMPLES
+   ======================================== */
+
+/* Example 1: Button */
+.custom-button {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    border: 2px solid var(--border-color);
+}
+
+.custom-button:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Example 2: Card */
+.custom-card {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.custom-card h3 {
+    color: var(--accent-primary);
+}
+
+.custom-card p {
+    color: var(--text-secondary);
+}
+
+/* Example 3: Input */
+.custom-input {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.custom-input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--shadow-color);
+}
+
+/* ========================================
+   COLOR PALETTE VISUALIZATION
+   ======================================== */
+
+/*
+LIGHT MODE PALETTE:
+┌─────────────────────────────────────────┐
+│ Backgrounds:                            │
+│ ▓▓▓▓ #ffffff (bg-primary)              │
+│ ▒▒▒▒ #f5f5f5 (bg-secondary)            │
+│ ░░░░ #e8e8e8 (bg-tertiary)             │
+│                                         │
+│ Text:                                   │
+│ ████ #2d1a1a (text-primary)            │
+│ ▓▓▓▓ #4a3333 (text-secondary)          │
+│ ▒▒▒▒ #6b4f4f (text-tertiary)           │
+│                                         │
+│ Accents:                                │
+│ ████ #8b2f2f (accent-primary)          │
+│ ▓▓▓▓ #a64545 (accent-secondary)        │
+│ ████ #6b2424 (accent-hover)            │
+└─────────────────────────────────────────┘
+
+DARK MODE PALETTE:
+┌─────────────────────────────────────────┐
+│ Backgrounds:                            │
+│ ████ #000000 (bg-primary)              │
+│ ▓▓▓▓ #1a1a1a (bg-secondary)            │
+│ ▒▒▒▒ #2a2a2a (bg-tertiary)             │
+│                                         │
+│ Text:                                   │
+│ ░░░░ #ffffff (text-primary)            │
+│ ▒▒▒▒ #e0e0e0 (text-secondary)          │
+│ ▓▓▓▓ #b0b0b0 (text-tertiary)           │
+│                                         │
+│ Accents:                                │
+│ ✨✨ #FFD700 (accent-primary - Gold)   │
+│ ✨✨ #FFED4E (accent-secondary)        │
+│ ✨✨ #FFC700 (accent-hover)            │
+└─────────────────────────────────────────┘
+*/
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+   ======================================== */
+
+/*
+Desktop:     > 1024px
+Tablet:      768px - 1024px
+Mobile:      480px - 768px
+Small:       < 480px
+
+Example usage:
+@media (max-width: 768px) {
+    .element {
+        padding: 16px;
+    }
+}
+*/

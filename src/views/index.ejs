@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astha Enterprises - Premium Fabrics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/styles/home.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="font-sans antialiased overflow-auto h-screen"
+    style="background-color: var(--color-bg); color: var(--color-text);">
+
+    <div id="app-wrapper" class="h-full w-full">
+        <%- include ('partials/header.ejs') %>
+            <!-- Header section -->
+            <section class="relative w-full flex items-center justify-center bg-cover bg-center"
+                style="height: 50vh; background-image: url('/images/header.jpeg');">
+
+                <div class="relative z-10 text-center px-6">
+                    <h1 class="font-serif text-5xl sm:text-6xl lg:text-8xl font-light text-white mb-6 tracking-wide">
+                        Astha
+                        <span style="color: var(--color-primary);">Enterprises</span>
+                    </h1>
+                    <div class="w-24 h-px bg-white/30 mx-auto mb-6"></div>
+                    <p class="text-white/70 text-sm sm:text-base tracking-widest uppercase">
+                        Premium Fabrics Since 2002
+                    </p>
+                </div>
+
+            </section>
+            <!-- Hero Section -->
+            <section id="home"
+                class="relative pt-20 pb-12 lg:pt-52 lg:pb-28 min-h-screen flex items-center overflow-hidden">
+
+                <!-- TOP-LEFT BACKGROUND VIDEO (SECTION KE ANDAR) -->
+                <video autoplay muted loop playsinline
+                    class="hidden lg:block absolute top-0 left-0 w-[40%] h-[50%] object-cover opacity-100 pointer-events-none">
+                    <source src="/images/bg-vdo.mp4" type="video/mp4">
+                </video>
+                <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+
+                    <div class="grid lg:grid-cols-2 gap-20 lg:gap-32 items-center">
+
+                        <!-- LEFT CONTENT -->
+                        <div class="animate-left">
+
+                            <p class="text-xs tracking-widest uppercase text-gray-500 mb-10 fade-up delay-1">
+                                Premium Textiles
+                            </p>
+
+                            <h1 id="hero-title"
+                                class="font-serif text-6xl sm:text-7xl lg:text-8xl font-light leading-tight mb-12 fade-up delay-2"
+                                style="color: var(--color-text);">
+                                Fabric Excellence
+                                <span style="color: var(--color-primary);">Since 2002</span>
+                            </h1>
+
+                            <div class="line-separator mb-10 fade-up delay-3"></div>
+
+                            <p id="hero-subtitle"
+                                class="text-xl lg:text-2xl text-gray-600 leading-relaxed mb-16 max-w-2xl fade-up delay-4">
+                                Curating India's finest selection of silk, cotton, linen, and designer fabrics for
+                                discerning professionals and fashion houses.
+                            </p>
+
+                            <div class="flex flex-col sm:flex-row gap-5 mb-20 fade-up delay-5">
+                                <button id="cta-primary"
+                                    class="px-12 py-5 text-sm font-medium tracking-wide text-white transition-opacity hover-opacity"
+                                    style="background-color: var(--color-text);" onclick="window.location.href='/shop'">
+                                    VIEW COLLECTION
+                                </button>
+
+                                <a 
+  href="https://wa.me/919818926023?text=Hello%20I%20would%20like%20to%20make%20a%20bulk%20inquiry%20regarding%20your%20fabrics."
+  target="_blank"
+  class="inline-block px-12 py-5 text-sm font-medium tracking-wide 
+         border border-gray-300 
+         hover:border-gray-900 
+         transition-all"
+  style="color: var(--color-text);"
+>
+  BULK INQUIRY
+</a>
+
+                            </div>
+
+                            <!-- STATS -->
+                            <!-- STATS -->
+                            <div class="flex flex-wrap gap-8 lg:gap-16 fade-up delay-6 justify-center lg:justify-start">
+                                <div>
+                                    <p class="font-serif text-4xl sm:text-5xl font-light mb-2">23</p>
+                                    <p class="text-xs tracking-wide text-gray-500">YEARS</p>
+                                </div>
+                                <div>
+                                    <p class="font-serif text-4xl sm:text-5xl font-light mb-2">500+</p>
+                                    <p class="text-xs tracking-wide text-gray-500">VARIETIES</p>
+                                </div>
+                                <div>
+                                    <p class="font-serif text-4xl sm:text-5xl font-light mb-2">25K+</p>
+                                    <p class="text-xs tracking-wide text-gray-500">CLIENTS</p>
+                                </div>
+                            </div>
+
+                            <!-- Mobile-only Hero Image -->
+                            <div class="lg:hidden mt-12 fade-up delay-7">
+                                <div class="fabric-block h-[300px] w-full overflow-hidden rounded-sm shadow-lg">
+                                    <img src="/images/home1.jpeg" alt="Premium Fabric"
+                                        class="w-full h-full object-cover">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT FABRIC BLOCKS -->
+                        <div class="hidden lg:grid grid-cols-2 gap-5 animate-right">
+                            <div class="space-y-5">
+                                <div class="fabric-blockfabric-anim delay-a" style="height: 340px;">
+                                    <img src="/images/home1.jpeg" alt="">
+                                </div>
+                                <div class="fabric-block fabric-anim delay-b" style="height: 220px;">
+                                    <img src="/images/home2.jpeg" alt="">
+                                </div>
+                            </div>
+
+                            <div class="space-y-5 pt-16">
+                                <div class="fabric-block fabric-anim delay-c" style="height: 240px;">
+                                    <img src="/images/home3.jpeg" alt="">
+                                </div>
+                                <div class="fabric-block fabric-anim delay-d" style="height: 340px;">
+                                    <img src="/images/home4.jpeg" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section>
+                <img src="/images/coverphoto.jpeg" alt="">
+            </section>
+            <!-- Collections Section -->
+
+            <section id="collections" class="py-12 lg:py-24 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+                        <div>
+                            <p class="text-xs tracking-widest uppercase text-gray-500 mb-4">Our Range</p>
+                            <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light"
+                                style="color: var(--color-text);">Fabric Collections</h2>
+                        </div>
+                        <div class="line-separator mt-6 lg:mt-0 lg:mb-3"></div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                        <% if (typeof signatureProducts !=='undefined' && signatureProducts && signatureProducts.length>
+                            0)
+                            { %>
+                            <% signatureProducts.forEach((product)=> { %>
+                                <button class="group hover-translate"
+                                    onclick="openSignatureProduct('<%= product._id %>')">
+                                    <div class="bg-white shadow-card mb-6 overflow-hidden">
+                                        <% if (product.outofstock) { %>
+                                            <div
+                                                class="absolute inset-0 bg-black/60 z-10 flex items-center justify-center">
+                                                <span
+                                                    class="text-white font-bold text-lg sm:text-2xl transform -rotate-12 border-4 border-white px-4 py-2">SOLD
+                                                    OUT</span>
+                                            </div>
+                                            <% } %>
+                                                <div class="fabric-burgundy h-64">
+                                                    <img src="<%= product.images[0] %>" alt="<%= product.name %>"
+                                                        class="w-full h-full object-cover">
+                                                </div>
+                                    </div>
+                                    <h3 class="font-serif text-2xl mb-3" style="color: var(--color-text);">
+                                        <%= product.name %>
+                                    </h3>
+                                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                        <%= product.description %>
+                                    </p>
+
+                                </button>
+                                <% }); %>
+                                    <% } else { %>
+                                        <div class="col-span-full text-center text-gray-400 py-10">
+                                            <p>No signature products available. </p>
+                                        </div>
+                                        <% } %>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-12 lg:py-24">
+                <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                    <div class="grid md:grid-cols-3 gap-12 lg:gap-16">
+                        <div>
+                            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center mb-6">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2L2 7v10c0 5 5 8 10 11 5-3 10-6 10-11V7l-10-5z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-2xl mb-4" style="color: var(--color-text);">Certified Quality
+                            </h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">Rigorous quality control ensures every
+                                fabric
+                                meets international standards.</p>
+                        </div>
+                        <div>
+                            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center mb-6">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2v20M2 12h20" />
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-2xl mb-4" style="color: var(--color-text);">Wholesale Pricing
+                            </h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">Competitive rates with flexible payment
+                                terms
+                                for bulk orders.</p>
+                        </div>
+                        <div>
+                            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center mb-6">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M3 12h18M12 3l9 9-9 9" />
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-2xl mb-4" style="color: var(--color-text);">Pan-India Delivery
+                            </h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">Swift and reliable shipping to every major
+                                city
+                                across the country.</p>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- About Section -->
+            <section id="about" class="py-12 lg:py-24 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                    <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center"><!-- Left Visual -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="fabric-slate h-64 sm:h-80 overflow-hidden rounded-sm"><img
+                                    src="/images/home5.jpeg" alt=""
+                                    class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                            </div>
+                            <div class="fabric-charcoal h-64 sm:h-80 sm:translate-y-12 overflow-hidden rounded-sm"><img
+                                    src="/images/home6.jpeg" alt=""
+                                    class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                            </div>
+                            <div class="fabric-burgundy h-64 sm:h-80 overflow-hidden rounded-sm hidden sm:block"><img
+                                    src="/images/home7.jpeg" alt=""
+                                    class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                            </div>
+                        </div><!-- Right Content -->
+                        <div>
+                            <p class="text-xs tracking-widest uppercase text-gray-500 mb-0">Our Story</p>
+                            <h2 id="about-title" class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light mb-8"
+                                style="color: var(--color-text);">Two Dacades of Trust</h2>
+                            <div class="line-separator mb-8"></div>
+                            <p id="about-description" class="text-base text-gray-600 leading-relaxed mb-12">Established
+                                in
+                                2002, Astha Enterprises has grown from a modest textile shop to one of India's most
+                                trusted
+                                fabric suppliers. We serve fashion designers, boutique owners, and textile professionals
+                                who
+                                demand nothing but the finest quality.</p>
+                            <div class="space-y-6">
+                                <div class="flex gap-6">
+                                    <div class="w-1 flex-shrink-0" style="background-color: var(--color-primary);">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-2" style="color: var(--color-text);">Quality Assurance
+                                        </h4>
+                                        <p class="text-sm text-gray-600 leading-relaxed">Every fabric undergoes
+                                            meticulous
+                                            inspection before delivery</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-6">
+                                    <div class="w-1 flex-shrink-0" style="background-color: var(--color-primary);">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-2" style="color: var(--color-text);">Expert
+                                            Consultation
+                                        </h4>
+                                        <p class="text-sm text-gray-600 leading-relaxed">Professional guidance for
+                                            fabric
+                                            selection and bulk orders</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-6">
+                                    <div class="w-1 flex-shrink-0" style="background-color: var(--color-primary);">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium mb-2" style="color: var(--color-text);">Timely Delivery
+                                        </h4>
+                                        <p class="text-sm text-gray-600 leading-relaxed">Reliable shipping with tracking
+                                            for
+                                            every order</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- Contact Section -->
+            <section id="contact" class="py-12 lg:py-32">
+                <div class="max-w-5xl mx-auto px-6 lg:px-12">
+                    <div class="text-center mb-16">
+                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light mb-8"
+                            style="color: var(--color-text);">Let's Work Together</h2>
+                        <div class="line-separator mx-auto mb-8"></div>
+                        <p class="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">Whether you need fabrics for
+                            a
+                            special project or bulk orders for your business, our team is ready to assist you.</p>
+                    </div>
+                    <div class="grid sm:grid-cols-3 gap-8 mb-16">
+                        <div class="text-center">
+                            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center mx-auto mb-4">
+                                <span class="text-xl">📍</span>
+                            </div>
+                            <p class="text-sm font-medium mb-2" style="color: var(--color-text);">Visit Us</p>
+                            <p class="text-sm text-gray-600">Textile Market District<br>
+                                Mumbai, Maharashtra</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center mx-auto mb-4">
+                                <span class="text-xl">📞</span>
+                            </div>
+                            <p class="text-sm font-medium mb-2" style="color: var(--color-text);">Call Us</p>
+                            <p class="text-sm text-gray-600">+91 98765 43210<br>
+                                Mon - Sat: 9AM - 8PM</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 border border-gray-300 flex items-center justify-center mx-auto mb-4">
+                                <span class="text-xl">✉️</span>
+                            </div>
+                            <p class="text-sm font-medium mb-2" style="color: var(--color-text);">Email Us</p>
+                            <a href="mailto:asthajain02005@gmail.com" class="text-sm text-gray-600">asthajain02005@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </section><!-- Footer -->
+            <footer class="py-12 border-t border-gray-200">
+                <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                        <div>
+                            <h3 class="font-serif text-xl mb-4" style="color: var(--color-text);">Astha Enterprises</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">Premium fabrics since 2002</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium mb-4" style="color: var(--color-text);">Navigation</h4>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><a href="#home" class="hover-opacity">Home</a></li>
+                                <li><a href="#collections" class="hover-opacity">Collections</a></li>
+                                <li><a href="#about" class="hover-opacity">About</a></li>
+                                <li><a href="#contact" class="hover-opacity">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium mb-4" style="color: var(--color-text);">Collections</h4>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><a href="#" class="hover-opacity">Silk Fabrics</a></li>
+                                <li><a href="#" class="hover-opacity">Cotton</a></li>
+                                <li><a href="#" class="hover-opacity">Linen</a></li>
+                                <li><a href="#" class="hover-opacity">Designer</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium mb-4" style="color: var(--color-text);">Connect</h4>
+                            <div class="flex gap-4"><a href="#"
+                                    class="w-10 h-10 border border-gray-300 flex items-center justify-center text-sm hover-opacity">f</a>
+                                <a href="#"
+                                    class="w-10 h-10 border border-gray-300 flex items-center justify-center text-xs hover-opacity">in</a>
+                                <a href="#"
+                                    class="w-10 h-10 border border-gray-300 flex items-center justify-center hover-opacity">📷</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-200 pt-8 text-center">
+                        <p class="text-sm text-gray-500">© 2026 Astha Enterprises. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+    </div>
+    <script>
+        const defaultConfig = {
+            hero_title: 'Fabric Excellence Since 2002',
+            hero_subtitle: 'Curating India\'s finest selection of silk, cotton, linen, and designer fabrics for discerning professionals and fashion houses.',
+            about_title: 'Two Dacades of Trust',
+            about_description: 'Established in 2002, Astha Enterprises has grown from a modest textile shop to one of India\'s most trusted fabric suppliers. We serve fashion designers, boutique owners, and textile professionals who demand nothing but the finest quality.',
+            cta_button_text: 'VIEW COLLECTION',
+            cta_secondary_text: 'BULK INQUIRY',
+            background_color: '#ffffff',
+            surface_color: '#f8f9fa',
+            text_color: '#1a1a1a',
+            primary_color: '#c41e3a',
+            secondary_color: '#2c3e50',
+            font_family: 'Cormorant Garamond',
+            font_size: 16
+        };
+
+        let config = { ...defaultConfig };
+
+        async function onConfigChange(cfg) {
+            config = { ...defaultConfig, ...cfg };
+
+            // Update CSS variables
+            document.documentElement.style.setProperty('--color-bg', config.background_color);
+            document.documentElement.style.setProperty('--color-surface', config.surface_color);
+            document.documentElement.style.setProperty('--color-text', config.text_color);
+            document.documentElement.style.setProperty('--color-primary', config.primary_color);
+            document.documentElement.style.setProperty('--color-secondary', config.secondary_color);
+
+            // Update body colors
+            document.body.style.backgroundColor = config.background_color;
+            document.body.style.color = config.text_color;
+
+            // Update text content
+            const heroTitle = document.getElementById('hero-title');
+            if (heroTitle) {
+                const titleParts = config.hero_title.split('Since');
+                if (titleParts.length > 1) {
+                    heroTitle.innerHTML = `${titleParts[0]}Since<span style="color: ${config.primary_color};"> ${titleParts[1]}</span>`;
+                } else {
+                    heroTitle.innerHTML = config.hero_title;
+                }
+            }
+
+            const heroSubtitle = document.getElementById('hero-subtitle');
+            if (heroSubtitle) heroSubtitle.textContent = config.hero_subtitle;
+
+            const aboutTitle = document.getElementById('about-title');
+            if (aboutTitle) aboutTitle.textContent = config.about_title;
+
+            const aboutDesc = document.getElementById('about-description');
+            if (aboutDesc) aboutDesc.textContent = config.about_description;
+
+            const ctaPrimary = document.getElementById('cta-primary');
+            if (ctaPrimary) ctaPrimary.textContent = config.cta_button_text;
+
+            const ctaSecondary = document.getElementById('cta-secondary');
+            if (ctaSecondary) ctaSecondary.textContent = config.cta_secondary_text;
+
+            // Update fonts
+            const fontStack = `${config.font_family}, serif`;
+            document.querySelectorAll('.font-serif').forEach(el => {
+                el.style.fontFamily = fontStack;
+            });
+
+            // Update font sizes
+            const baseSize = config.font_size;
+            document.body.style.fontSize = `${baseSize}px`;
+        }
+
+        function mapToCapabilities(cfg) {
+            return {
+                recolorables: [
+                    {
+                        get: () => cfg.background_color || defaultConfig.background_color,
+                        set: (value) => { cfg.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+                    },
+                    {
+                        get: () => cfg.surface_color || defaultConfig.surface_color,
+                        set: (value) => { cfg.surface_color = value; window.elementSdk.setConfig({ surface_color: value }); }
+                    },
+                    {
+                        get: () => cfg.text_color || defaultConfig.text_color,
+                        set: (value) => { cfg.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+                    },
+                    {
+                        get: () => cfg.primary_color || defaultConfig.primary_color,
+                        set: (value) => { cfg.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+                    },
+                    {
+                        get: () => cfg.secondary_color || defaultConfig.secondary_color,
+                        set: (value) => { cfg.secondary_color = value; window.elementSdk.setConfig({ secondary_color: value }); }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => cfg.font_family || defaultConfig.font_family,
+                    set: (value) => { cfg.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+                },
+                fontSizeable: {
+                    get: () => cfg.font_size || defaultConfig.font_size,
+                    set: (value) => { cfg.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(cfg) {
+            return new Map([
+                ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+                ['hero_subtitle', cfg.hero_subtitle || defaultConfig.hero_subtitle],
+                ['about_title', cfg.about_title || defaultConfig.about_title],
+                ['about_description', cfg.about_description || defaultConfig.about_description],
+                ['cta_button_text', cfg.cta_button_text || defaultConfig.cta_button_text],
+                ['cta_secondary_text', cfg.cta_secondary_text || defaultConfig.cta_secondary_text]
+            ]);
+        }
+
+        // Initialize SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+        function openSignatureProduct(productId) {
+            // Open shop page with product modal
+            window.location.href = `/shop?product=${productId}`;
+        }
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9c37180864339633',t:'MTc2OTMzNzAxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>

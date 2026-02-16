@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <% const seo=seoData || {}; %>
+    <title>Astha Enterprises - Premium Fabrics</title>
+    <% if (seo.description) { %>
+      <meta name="description" content="<%= seo.description %>" />
+      <% } %>
+        <% if (seo.keywords) { %>
+          <meta name="keywords" content="<%= seo.keywords %>" />
+          <% } %>
+            <link rel="canonical" href="<%= seo.canonical || 'https://asthaenterprises.com/shop' %>" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="<%= seo.ogTitle || seo.title || 'Astha Enterprises' %>" />
+            <meta property="og:description" content="<%= seo.ogDescription || seo.description || '' %>" />
+            <meta property="og:url" content="<%= seo.canonical || 'https://asthaenterprises.com/shop' %>" />
+            <meta property="og:image"
+              content="https://asthaenterprises.com/images/glass-perfume-bottles-delhi-ncr.png" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <link rel="stylesheet" href="styles/shop.css">
+            <script src="https://cdn.tailwindcss.com"></script>
+            <!-- <link rel="stylesheet" href="/styles/shop.css"> -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"
+              referrerpolicy="no-referrer"></script>
+            <link rel="icon" href="/favicon.ico" type="image/x-icon">
+            <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+            <link rel="apple-touch-icon" href="/favicon.png">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+              crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+              crossorigin="anonymous"></script>
+
+
+            <style>
+              * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+              }
+
+              body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f5f5f5;
+              }
+
+              /* Navigation Bar */
+              .navbar {
+                background-color: #1a1a1a;
+                padding: 20px 40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              }
+
+              /* Video Section */
+              .video-section {
+                width: 100%;
+                height: 300px;
+                overflow: hidden;
+                position: relative;
+              }
+
+              .video-section video {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+              }
+
+              .video-button {
+                background-color: #ffffff;
+                color: #461f1f;
+                padding: 20px 50px;
+                font-size: 24px;
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              }
+
+              .video-button:hover {
+                background-color: #333;
+                color: #ffffff;
+                padding: 22px 55px;
+              }
+
+              /* Categories Section */
+              .categories-section {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 20px 15px 50px;
+              }
+
+              .section-title {
+                font-size: 32px;
+                font-weight: bold;
+                color: #1a1a1a;
+                margin-bottom: 15px;
+                text-align: center;
+                display: none;
+              }
+
+              /* All Categories Full Width Box */
+              .all-categories-box {
+                position: relative;
+                height: 120px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                margin-bottom: 10px;
+
+              }
+
+              .all-categories-box:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+              }
+
+              .all-categories-box img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+
+              /* Category Grid */
+              .category-grid {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 10px;
+                margin-top: 10px;
+              }
+
+              .category-box {
+                position: relative;
+                height: 250px;
+                border-radius: 0px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+              }
+
+              .category-box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+              }
+
+              .category-box img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+
+              .category-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+
+              .category-name {
+                color: #fff;
+                font-size: 24px;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                text-align: center;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+              }
+
+              .category-box.hidden {
+                display: none;
+              }
+
+              /* Our Range Section */
+              .our-range-section {
+                margin-top: 30px;
+                padding: 0 15px;
+                text-align: center;
+              }
+
+              .our-range-title {
+                font-size: 36px;
+                font-weight: bold;
+                color: #000;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+              }
+
+              /* Responsive Design */
+              @media (max-width: 1200px) {
+                .category-grid {
+                  grid-template-columns: repeat(4, 1fr);
+                }
+              }
+
+              @media (max-width: 900px) {
+                .category-grid {
+                  grid-template-columns: repeat(3, 1fr);
+                }
+
+                .navbar {
+                  padding: 15px 20px;
+                }
+
+                .categories-section {
+                  padding: 0 15px 40px;
+                }
+              }
+
+              @media (max-width: 600px) {
+                .category-grid {
+                  grid-template-columns: repeat(3, 1fr);
+                  gap: 8px;
+                }
+
+                .category-box {
+                  height: 180px;
+                }
+
+                /* Mobile screen */
+                @media (max-width: 768px) {
+                  .category-box {
+                    height: 90px;
+                  }
+
+                  .category-name {
+                    font-size: 4px;
+                  }
+                }
+
+
+                .category-name {
+                  font-size: 16px;
+
+                }
+
+
+                .section-title {
+                  font-size: 24px;
+                }
+
+                .categories-section {
+                  padding: 0 15px 30px;
+                }
+
+                .all-categories-box {
+                  height: 100px;
+                }
+
+                .video-button {
+                  padding: 15px 35px;
+                  font-size: 18px;
+                }
+
+                .video-button:hover {
+                  padding: 16px 38px;
+                }
+
+                .our-range-title {
+                  font-size: 28px;
+                }
+              }
+            </style>
+</head>
+
+<body>
+
+  <%- include('partials/header') %>
+
+
+    <!-- Video Section -->
+    <section class="video-section">
+      <video autoplay muted loop playsinline class="w-full h-full object-cover">
+        <source src="/images/HeaderVideo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+    <div class="m-2 mb-0 mt-3"
+      style="text-align: center; padding: 30px 0; background-image: url('/images/exploreCollections.jpeg');">
+      <button class="video-button" onclick="scrollToCategories()">Explore Collections</button>
+    </div>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+      <h2 class="section-title">Explore Our Collections</h2>
+
+      <!-- All Categories Full Width Box -->
+      <div class="all-categories-box mt-2 md:mt-0" onclick="showAllCategories()">
+        <img src="/images/all.jpeg" alt="All Categories">
+        <div class="category-overlay">
+          <h3 class="category-name">ALL CATEGORIES</h3>
+        </div>
+      </div>
+
+      <!-- Category Grid -->
+      <div class="category-grid" id="categoryGrid">
+        <!-- Row 1 -->
+
+
+
+        <div class="category-box" data-category="Cotton">
+          <img src="/images/cotton.jpeg" alt="Cotton Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Cotton</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="premium">
+          <img src="/images/rayon.jpeg" alt="Rayon Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Rayon</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="silk">
+          <img src="/images/shantoon.jpeg" alt="Shantoon Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Shantoon</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="premium">
+          <img src="/images/velvet.jpeg" alt="Velvet Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Velvet</h3>
+          </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="category-box" data-category="cotton">
+          <img src="/images/linen.jpeg" alt="Linen Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Linen</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="silk">
+          <img src="/images/silk.jpeg" alt="Silk Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Silk</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="premium">
+          <img src="/images/chiffon.jpeg" alt="Chiffon Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Chiffon</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="cotton">
+          <img src="/images/denim.jpeg" alt="Denim Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Denim</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="premium">
+          <img src="/images/georgette.jpeg" alt="Georgette Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Georgette</h3>
+          </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="category-box" data-category="cotton">
+          <img src="/images/muslin.jpeg" alt="Muslin Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Muslin</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="silk">
+          <img src="/images/brocade.jpeg" alt="Brocade Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Brocade</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="premium">
+          <img src="/images/organza.jpeg" alt="Organza Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Organza</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="cotton">
+          <img src="/images/canvas.jpeg" alt="Canvas Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Canvas</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="premium">
+          <img src="/images/jacquard.jpeg" alt="Jacquard Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Jacquard</h3>
+          </div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="category-box" data-category="silk">
+          <img src="/images/taffeta.jpeg" alt="Taffeta Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Taffeta</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="cotton">
+          <img src="/images/khadi.jpeg" alt="Khadi Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Khadi</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="premium">
+          <img src="/images/crepe.jpeg" alt="Crepe Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Crepe</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="silk">
+          <img src="/images/banarasi.jpeg" alt="Banarasi Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Banarasi</h3>
+          </div>
+        </div>
+
+        <div class="category-box" data-category="cotton">
+          <img src="/images/chanderi.jpeg" alt="Chanderi Fabric">
+          <div class="category-overlay">
+            <h3 class="category-name">Chanderi</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Range Section -->
+    <section class="our-range-section bg-white">
+      <h2 class="our-range-title">Our Range</h2>
+      <!-- You can add your content here -->
+    </section>
+
+    <!-- Main -->
+    <main class="bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Products Grid -->
+        <section id="products">
+
+          <!-- Toolbar: search, sort, product count -->
+          <div class="mb-4 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <input id="searchInput" type="search" placeholder="Search products..."
+                class="px-3 py-2 border rounded-md text-sm" />
+              <select id="sortSelect" class="px-3 py-2 border rounded-md text-sm">
+                <option value="name">Sort: Newest</option>
+                <option value="newest">Sort: Name</option>
+              </select>
+            </div>
+            <div id="productCount" class="text-sm text-gray-600">Showing 0 products</div>
+          </div>
+
+          <!-- Grid: 2 columns on mobile, 4 on desktop -->
+          <div id="productsGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 items-start">
+            <!-- rendered via JS -->
+          </div>
+        </section>
+      </div>
+    </main>
+    </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden">
+      <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="closeModal"></div>
+      <div class="absolute inset-0 p-4 sm:p-8 grid place-items-center">
+        <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative">
+          <button id="xModal"
+            class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 grid place-items-center z-[999]">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <div id="modalContent" class="p-6 sm:p-8"></div>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+      <script src="/js/whatsapp-tracker.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+      <script id="products-data" type="application/json">
+  <%- JSON.stringify(products) %>
+</script>
+
+
+      <script>
+        const PRODUCTS = JSON.parse(
+          document.getElementById("products-data").textContent
+        );
+      </script>
+
+      <script>
+        // Scroll to categories when button is clicked
+        function scrollToCategories() {
+          const categoriesSection = document.querySelector('.categories-section');
+          categoriesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show all categories function - clear filter and scroll to products
+        function showAllCategories() {
+          // Clear existing filter and show all products
+          const categoryBoxes = document.querySelectorAll('.category-box');
+          categoryBoxes.forEach(box => {
+            box.classList.remove('hidden');
+          });
+
+          // Clear search input and reset filter state
+          state.search = '';
+          if (searchInput) {
+            searchInput.value = '';
+          }
+
+          // Show all products (clear filter)
+          renderProducts(applySort(PRODUCTS));
+
+          // Scroll to products section
+          const productsSection = document.getElementById('products');
+          if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+
+        // Add click handlers for category boxes - filter and scroll to products
+        document.querySelectorAll('.category-box').forEach(box => {
+          box.addEventListener('click', function () {
+            const categoryValue = this.getAttribute('data-category');
+            if (!categoryValue) return;
+
+            // Filter products by category
+            const filteredProducts = PRODUCTS.filter(p => {
+              if (!p.units || !p.units.categoryList) {
+                return false;
+              }
+              return p.units.categoryList.some(cat =>
+                cat.toLowerCase().includes(categoryValue.toLowerCase())
+              );
+            });
+
+            // Apply sort and render filtered products
+            const sortedFiltered = applySort(filteredProducts);
+            renderProducts(sortedFiltered);
+
+            // Scroll to products section
+            const productsSection = document.getElementById('products');
+            if (productsSection) {
+              productsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            console.log('Selected category:', categoryValue, 'Products found:', filteredProducts.length);
+          });
+        });
+      </script>
+
+      <script>
+
+        // Define applySort function before using it
+        function applySort(productsToSort) {
+          const sortValue = state.sort || (sortSelect ? sortSelect.value : 'newest');
+          let sortedProducts = [...productsToSort];
+
+          if (sortValue === "name") {
+            sortedProducts.sort((a, b) =>
+              a.name.localeCompare(b.name)
+            );
+          } else if (sortValue === "newest") {
+            sortedProducts.sort((a, b) => {
+              const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+              const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+              return dateB - dateA;
+            });
+          }
+
+          return sortedProducts;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          // Apply initial sort
+          const initialProducts = applySort(PRODUCTS);
+          renderProducts(initialProducts);
+
+          // Check if product ID is in URL to open modal
+          const urlParams = new URLSearchParams(window.location.search);
+          const productId = urlParams.get('product');
+          if (productId) {
+            // Wait for page to fully load, then open modal
+            setTimeout(() => {
+              if (typeof window.openProductModal === 'function') {
+                window.openProductModal(productId);
+              } else {
+                // If function not ready, wait a bit more
+                setTimeout(() => {
+                  if (typeof window.openProductModal === 'function') {
+                    window.openProductModal(productId);
+                  }
+                }, 1000);
+              }
+            }, 800);
+          }
+          const nav = document.getElementById('navbar');
+          if (nav) {
+            window.addEventListener('scroll', () => {
+              if (window.scrollY > 10) {
+                nav.classList.add('nav-blur');
+              } else {
+                nav.classList.remove('nav-blur');
+              }
+            });
+          }
+        });
+
+
+        let filteredProducts = [...PRODUCTS];
+        let currentDisplayedProducts = [...PRODUCTS];
+
+        // Base URL for image links - use production domain
+        const BASE_URL = '<%= baseUrl %>' || window.location.origin;
+
+        // State
+        const state = {
+          search: '',
+          // null = no filter applied (show everything). When user clicks a filter it becomes
+          // either a specific value (e.g. "Perfume Bottles") or the explicit "all" token.
+          JarsAndBottles: null,
+          exquisiteFragnances: null,
+          notes: new Set(),
+          sort: 'newest',
+        };
+
+        // ---------- CONFIG ----------
+        const COMPANY_LOGO_URL = "images/Arjan-attar-logo.png";
+
+        // Build same path as your product cards
+        //deleted the code
+
+
+        // ---------- DOM READY ---------- PDF 
+        //deleted the code
+
+
+        // ---------- IMAGE LOADER ----------
+        //deleted the code
+
+
+        // Elements
+        const grid = document.getElementById('productsGrid');
+        const countEl = document.getElementById('productCount');
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+
+        // working Render
+        function renderProducts(list) {
+          const grid = document.getElementById("productsGrid");
+          grid.innerHTML = "";
+
+          if (!list || !list.length) {
+            grid.innerHTML = `
+      <p class="col-span-full text-center text-gray-500 py-10">
+        No products found
+      </p>
+    `;
+            countEl.textContent = `Showing 0 products`;
+            currentDisplayedProducts = [];
+            return;
+          }
+
+          // Update current displayed products
+          currentDisplayedProducts = [...list];
+
+          // Update count
+          countEl.textContent = `Showing ${list.length} product${list.length !== 1 ? 's' : ''}`;
+
+          list.forEach(p => {
+            grid.innerHTML += `
+            <article class="product-card bg-white rounded-xl overflow-hidden flex flex-col"
+         onclick="openProductModal('${p._id}')">
+
+      <div class="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition flex flex-col h-full relative" style="min-height: 100%;">
+
+        <div class="absolute top-2 left-2 z-10">
+          ${p.featured ? '<span class="px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium bg-[color:var(--gold)] text-black">Featured</span>' : ''}
+        </div>
+
+        <!-- IMAGE -->
+        <div class="relative aspect-square bg-gray-100 overflow-hidden flex-shrink-0">
+          ${p.outofstock ? '<div class="absolute inset-0 bg-black/60 z-10 flex items-center justify-center"><span class="text-white font-bold text-lg sm:text-2xl transform -rotate-12 border-4 border-white px-4 py-2">SOLD OUT</span></div>' : ''}
+          <img
+            src="${p.images?.[0] || "/uploads/default.png"}"
+            alt="${p.name}"
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-300 ${p.outofstock ? 'opacity-50' : ''}"
+            onerror="this.src='/uploads/default.png'"
+          />
+        </div>
+
+        <!-- CONTENT -->
+        <div class="p-3 space-y-1.5 flex flex-col flex-grow min-h-0">
+
+          <!-- PRODUCT NAME -->
+          <h3 class="text-sm font-medium text-gray-800 truncate flex-shrink-0">
+            ${p.name}
+          </h3>
+
+          <p class="hidden sm:block text-gray-500 text-[11px] sm:text-sm mt-1 line-clamp-2 mb-2 flex-shrink-0">
+  ${p.description}
+</p>
+<p class="text-gray-500 text-[11px] sm:text-sm mt-1 line-clamp-2 mb-2 flex-shrink-0">HSN CODE: ${p.hsnCode}</p>
+
+          <!-- INDUSTRY -->
+          <p class="text-xs text-gray-500 flex-shrink-0 mb-0 md:mb-2">
+            ${(p.units?.categoryList || []).map(item => `
+              <span class="text-[10px] px-2 py-0.5 rounded-full border border-gray-300 text-gray-600 inline-block mr-1 mb-1">
+                ${item}
+              </span>
+            `).join("")}
+          </p>
+
+          <!-- CTA - Always at bottom with fixed position -->
+          <div class="mt-auto pt-0 md:pt-2 w-full">
+
+  <a href="https://wa.me/919818926023?text=Hi%20I%20am%20interested%20in%20${encodeURIComponent(p.name)}%0A${encodeURIComponent(BASE_URL + (p.images?.[0] || '/uploads/default.png'))}" 
+     target="_blank"
+     onclick="event.stopPropagation(); if(typeof trackWhatsAppClick === 'function') trackWhatsAppClick('${p._id}', '${p.name.replace(/'/g, "\\'")}', '${(p.units?.industryList?.[0] || '').replace(/'/g, "\\'")}', 'product');"
+
+     class="w-full flex items-center justify-center gap-2 
+            bg-[#25D366] hover:bg-[#1DA851] 
+            text-white font-semibold 
+            rounded-lg 
+            py-2 sm:py-2.5 
+            text-[13px] sm:text-[15px] 
+            min-h-[44px] 
+            transition-all duration-200 
+            active:scale-95"
+      style="padding-right: 12px; padding-left: 12px;"
+  >
+
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 32 32" 
+         class="w-[18px] h-[18px] sm:w-5 sm:h-5 fill-white flex-shrink-0 mr-0 p-0">
+      <path d="M16 .5C7.44.5.5 7.44.5 16c0 2.83.74 5.59 2.15 8.02L.5 31.5l7.7-2.07C10.35 30.27 13.12 31 16 31c8.56 0 15.5-6.94 15.5-15.5S24.56.5 16 .5zm0 28c-2.5 0-4.94-.67-7.06-1.93l-.5-.29-4.57 1.23 1.23-4.57-.29-.5C3.67 20.94 3 18.5 3 16 3 8.82 8.82 3 16 3s13 5.82 13 13-5.82 13-13 13z"/>
+    </svg>
+
+    <span style="margin-left: 0px; padding-left: 0px;">WhatsApp</span>
+
+  </a>
+
+</div>
+
+
+        </div>
+      </div>
+      </article>
+    `;
+
+          });
+        }
+
+        function applyFilters(selectedJar) {
+          const term = state.search.toLowerCase().trim();
+          let products = [...PRODUCTS];
+
+          // Apply industry filter if set from URL
+          //deleted the code
+
+
+          // If All selected â†’ no jar/bottle filtering (case-insensitive check)
+          //deleted the code
+
+          let filteredProducts = products.filter(p => {
+
+            /* ---------------- SEARCH FILTER ---------------- */
+            if (term && !p.name.toLowerCase().includes(term)) {
+              return false;
+            }
+
+            return true;
+          });
+
+          // Apply sort to filtered products
+          filteredProducts = applySort(filteredProducts);
+          renderProducts(filteredProducts);
+        }
+
+
+
+        // UI helpers
+        //deleted the code 
+
+        // Detect industry filter from URL and apply it globally
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedIndustry = urlParams.get('industry');
+        //deleted the code
+
+
+        // Handle search query from URL
+        const searchQuery = urlParams.get('q');
+        if (searchQuery) {
+          state.search = searchQuery;
+          searchInput.value = searchQuery;
+        }
+
+
+        // Events
+        function setupEvents() {
+          // Search
+          searchInput.addEventListener('input', (e) => {
+            state.search = e.target.value;
+            applyFilters(state.search);
+          });
+          // Sort
+          sortSelect.addEventListener('change', (e) => {
+            state.sort = e.target.value;
+            // Apply sort to currently displayed products
+            const sorted = applySort(currentDisplayedProducts);
+            renderProducts(sorted);
+          });
+
+          // Desktop filter buttons
+          //deleted the code
+
+          // Mobile sheet
+          //deleted the code
+
+          // Modal controls
+          document.getElementById('closeModal').addEventListener('click', closeProductModal);
+          document.getElementById('xModal').addEventListener('click', closeProductModal);
+        }
+        // Modal - Make it globally accessible
+        window.openProductModal = function (id) {
+
+          console.log("Opening product modal for ID:", id);
+
+
+          console.log("PRODUCTS:", PRODUCTS);
+          const p = PRODUCTS.find(p => p._id === id);
+
+          console.log(p);
+          // Use product images array, fallback to single image
+          const images =
+            (Array.isArray(p.images) && p.images.length)
+              ? p.images
+              : ["/uploads/default.png"];
+
+
+          const content = `
+    <div class="flex flex-col md:grid md:grid-cols-2 gap-6">
+
+      <!-- LEFT: main image + thumbnails -->
+      <div class="flex flex-col gap-3 w-full">
+        <!-- Main image box -->
+        <div class="relative rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+          ${p.featured ? `
+            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-[color:var(--gold)] text-black text-xs font-medium z-10">
+              Featured
+            </span>` : ''}
+          ${p.outofstock ? `
+            <div class="absolute inset-0 bg-black/70 z-20 flex items-center justify-center pointer-events-none">
+              <span class="text-white font-bold text-2xl sm:text-3xl md:text-4xl transform -rotate-12 border-4 border-white px-4 py-2 sm:px-6 sm:py-3">SOLD OUT</span>
+            </div>
+          ` : ''}
+            
+          <img
+  id="mainProductImage"
+  src="${images[0]}"
+  alt="${p.name}"
+  class="w-full h-[430px] md:h-[500px] object-contain bg-white rounded-lg ${p.outofstock ? 'opacity-50' : ''}"
+  onerror="this.src='/uploads/default.png'"
+/>
+
+        </div>
+
+        <!-- Thumbnails row -->
+        <div class="flex gap-2 overflow-x-auto">
+          ${images.map((img, index) => `
+            <button
+              type="button"
+              class="thumbnail-btn shrink-0 rounded-lg overflow-hidden border relative ${index === 0 ? 'border-2 border-[color:var(--gold)]' : 'border border-gray-200'}
+"
+              data-img="${img}"
+            >
+              ${p.outofstock ? '<div class="absolute inset-0 bg-black/50 z-10"></div>' : ''}
+              <img
+                src="${img}"
+                alt="${p.name} thumbnail ${index + 1}"
+                class="w-16 h-16 object-cover ${p.outofstock ? 'opacity-50' : ''}"
+                onerror="this.src='/uploads/default.png'"
+              />
+            </button>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- RIGHT: product details -->
+
+      <div class="w-full flex flex-col">
+       ${Array.isArray(p.units?.categoryList)
+              ? p.units.categoryList.map(item => `
+      <span class="chip px-3 py-1 rounded-full text-xs">
+        ${item}
+      </span>
+    `).join("")
+              : ""
+            }
+
+                    <h1 class="cormorant font-black text-base sm:text-3xl text-black-1500 leading-snug mt-3">${p.name}</h1>
+
+        <p class="text-gray-600 mt-4">${p.description}</p>
+        <p class="text-gray-600 mt-4">${p.hsncode}</p>
+        ${Array.isArray(p.units?.printingqualityList)
+              ? p.units.printingqualityList.map(item => `
+      <span class="chip px-3 py-1 rounded-full text-xs">
+        ${item}
+      </span>
+    `).join("")
+              : ""
+            }
+              ${Array.isArray(p.units?.printplainList)
+              ? p.units.printplainList.map(item => `
+      <span class="chip px-3 py-1 rounded-full text-xs">
+        ${item}
+      </span>
+    `).join("")
+              : ""
+            }
+
+        <div class="mt-5 grid grid-cols-1 gap-4 text-sm">
+
+<!-- WIDTH DROPDOWN (ALL INDUSTRIES) -->
+<div class="border border-gray-200 rounded-lg p-3">
+  <label class="text-gray-500 block mb-1">Width</label>
+
+  <select id="widthSelect"
+    class="w-full rounded-md border border-gray-300 px-3 py-2
+           focus:ring-2 focus:ring-[color:var(--gold)]
+           focus:border-[color:var(--gold)]">
+
+           <option value="">All</option>
+    ${(p.units?.widthList || ["Standard"])
+              .map(s => `<option value="${s}">${s}</option>`)
+              .join("")}
+
+  </select>
+</div>
+
+
+ ${p.units.colorList?.length
+              ? `
+    <div class="border border-gray-200 rounded-lg p-3">
+      <label class="text-gray-500 block mb-1">Colors Available</label>
+
+      <select
+        id="colorSelect"
+        class="w-full rounded-md border border-gray-300 px-3 py-2
+               focus:ring-2 focus:ring-[color:var(--gold)]
+               focus:border-[color:var(--gold)]"
+      >
+        ${p.units.colorList
+                .map(f => `<option value="${f}">${f}</option>`)
+                .join("")}
+      </select>
+    </div>
+  `
+              : ""
+            }
+
+
+        <div class="mt-auto pt-4 md:px-4">
+          <a
+            id="productWhatsAppBtn"
+            href="https://wa.me/919818926023?text=${encodeURIComponent(
+              `Hi I am interested in ${p.name}\n${BASE_URL}${images[0]}`
+            )}"
+            target="_blank"
+            onclick="if(typeof trackWhatsAppClick === 'function') trackWhatsAppClick('${p._id}', '${p.name.replace(/'/g, "\\'")}', '${(p.units?.industryList?.[0] || '').replace(/'/g, "\\'")}', 'product');"
+            class="gold-btn w-full mt-2 py-3 rounded-lg text-sm font-semibold flex items-center justify-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-white">
+              <path d="M16 .5C7.44.5.5 7.44.5 16c0 2.83.74 5.59 2.15 8.02L.5 31.5l7.7-2.07C10.35 30.27 13.12 31 16 31c8.56 0 15.5-6.94 15.5-15.5S24.56.5 16 .5zm0 28c-2.5 0-4.94-.67-7.06-1.93l-.5-.29-4.57 1.23 1.23-4.57-.29-.5C3.67 20.94 3 18.5 3 16 3 8.82 8.82 3 16 3s13 5.82 13 13-5.82 13-13 13zm7.2-9.98c-.39-.2-2.3-1.13-2.66-1.26-.36-.13-.63-.2-.9.2s-1.03 1.26-1.27 1.52c-.23.26-.47.29-.86.1-.39-.2-1.63-.6-3.1-1.92-1.15-1.02-1.92-2.3-2.15-2.69-.23-.39-.02-.6.17-.79.17-.17.39-.46.59-.69.2-.23.26-.39.39-.65.13-.26.07-.49-.03-.69-.1-.2-.9-2.17-1.24-2.97-.33-.8-.67-.69-.9-.7h-.77c-.26 0-.69.1-1.05.49-.36.39-1.37 1.34-1.37 3.26s1.4 3.77 1.59 4.03c.2.26 2.75 4.2 6.67 5.89.93.4 1.65.64 2.21.82.93.3 1.78.26 2.45.16.75-.11 2.3-.94 2.62-1.84.33-.9.33-1.67.23-1.84-.1-.17-.36-.26-.75-.46z"/>
+            </svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+
+          const modal = document.getElementById('productModal');
+          document.getElementById('modalContent').innerHTML = content;
+          modal.classList.remove('hidden');
+          modal.classList.add('grid');
+          document.body.style.overflow = 'hidden';
+
+          const closeBtn = modal.querySelector('#xModal');
+          if (closeBtn) {
+            closeBtn.addEventListener('click', closeProductModal);
+          }
+
+          // Thumbnail click logic
+          const mainImgEl = modal.querySelector('#mainProductImage');
+          const waBtn = modal.querySelector('#productWhatsAppBtn');
+          const thumbBtns = modal.querySelectorAll('.thumbnail-btn');
+
+          const widthSelect = modal.querySelector('#widthSelect');
+          const colorSelect = modal.querySelector('#colorSelect');
+
+          // Build WhatsApp message
+          function updateWhatsApp(imgPath = images[0]) {
+            // Ensure absolute URL using BASE_URL
+            const imgUrl = imgPath.startsWith('http')
+              ? imgPath
+              : BASE_URL + (imgPath.startsWith('/') ? imgPath : '/' + imgPath);
+
+            const widthVal = widthSelect ? widthSelect.value : '';
+            const colorVal = colorSelect ? colorSelect.value : '';
+
+            let msg =
+              `Hi I am interested in ${p.name}\n` +
+              (widthVal ? `Width: ${widthVal}\n` : '') +
+              (colorVal ? `Color: ${colorVal}\n` : '') +
+              `\n${imgUrl}`;
+
+            waBtn.href = `https://wa.me/919818926023?text=${encodeURIComponent(msg)}`;
+          }
+
+          // Initial WhatsApp message
+          updateWhatsApp(images[0]);
+
+          // Thumbnail click
+          thumbBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const imgName = btn.dataset.img;
+
+              mainImgEl.src = imgName;
+
+              thumbBtns.forEach(b => {
+                b.classList.remove('border-2', 'border-[color:var(--gold)]');
+                b.classList.add('border', 'border-gray-200');
+              });
+              btn.classList.remove('border', 'border-gray-200');
+              btn.classList.add('border-2', 'border-[color:var(--gold)]');
+
+              updateWhatsApp(imgName);
+            });
+          });
+
+          // Width change
+          if (widthSelect) {
+            widthSelect.addEventListener('change', () => {
+              // Extract path from src (remove origin if present)
+              const imgPath = mainImgEl.src.replace(BASE_URL, '').replace(window.location.origin, '');
+              updateWhatsApp(imgPath);
+            });
+          }
+
+          // Colors change (only for Colors)
+          if (colorSelect) {
+            colorSelect.addEventListener('change', () => {
+              // Extract path from src (remove origin if present)
+              const imgPath = mainImgEl.src.replace(BASE_URL, '').replace(window.location.origin, '');
+              updateWhatsApp(imgPath);
+            });
+          }
+        }
+        function closeProductModal() {
+          document.getElementById('productModal').classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+
+        // Init
+        (function init() {
+          setupEvents();
+          // No default filter active on load -> show all products
+          // ensure all buttons enabled and none visually active
+          document.querySelectorAll('aside .filter-btn, aside .exq-filter, .sheet .m-filter, .sheet .m-exq').forEach(b => {
+            b.disabled = false;
+            b.classList.remove('opacity-50', 'pointer-events-none');
+          });
+        })();
+      </script>
+      <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'982a742516c8a7ee',t:'MTc1ODQ2NzA1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+# robots.txt for Astha Enterprises
+User-agent: *
+Disallow: /admin
+Disallow: /administrator
+Disallow: /admin/
+Disallow: /admin/*
+
+Allow: /
+
+Sitemap: https://asthaenterprises.com/sitemap.xml

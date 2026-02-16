@@ -1,0 +1,27 @@
+{
+  "widthList": [
+    "400cm",
+    "250cm"
+  ],
+  "colorList": [
+    "Red",
+    "Green",
+    "Blue"
+  ],
+  "printplainList": [
+    "Print",
+    "Plain"
+  ],
+  "printingqualityList": [
+    "Best",
+    "Average",
+    "Low"
+  ],
+  "categoryList": [
+    "Cotton",
+    "Satin",
+    "Shantoon",
+    "Rayon",
+    "Organza"
+  ]
+}
