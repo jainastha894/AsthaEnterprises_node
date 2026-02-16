@@ -1,590 +1,638 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Premium Fabrics Since 2002</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: 'Georgia', serif;
-            line-height: 1.6;
-            color: #2c2c2c;
-            background: #f5f3f0;
-            overflow-x: hidden;
-        }
+    <% if (typeof seoData !=='undefined' && seoData) { %>
+        <title>
+            <%= seoData.title || 'About Us - Premium Fabrics Since 2002' %>
+        </title>
+        <meta name="description"
+            content="<%= seoData.description || 'About Astha Enterprises - Leading fabric supplier in Shanti Mohalla, Gandhi Nagar since 2002.' %>">
+        <meta name="keywords" content="<%= seoData.keywords || 'Astha Enterprises, about us, fabric supplier' %>">
+        <link rel="canonical" href="<%= seoData.canonical || 'https://asthaenterprises.com/about' %>">
 
-        .hero-section {
-            background: url('/images/about.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: rgb(109, 58, 58);
-            padding: 120px 20px 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+        <meta property="og:title" content="<%= seoData.ogTitle || seoData.title %>">
+        <meta property="og:description" content="<%= seoData.ogDescription || seoData.description %>">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="<%= seoData.canonical %>">
+        <meta property="og:image" content="https://asthaenterprises.com/images/about.jpeg">
 
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="/images/about.jpeg"><rect width="100" height="100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>');
-            background-size: 50px 50px;
-            opacity: 0.2;
-        }
+        <% if (seoData['@graph']) { %>
+            <script type="application/ld+json">
+            <%- JSON.stringify({ "@context": "https://schema.org", "@graph": seoData['@graph'] }) %>
+        </script>
+            <% } %>
+                <% } else { %>
+                    <title>About Us - Premium Fabrics Since 2002</title>
+                    <% } %>
+                        <style>
+                            * {
+                                margin: 0;
+                                padding: 0;
+                                box-sizing: border-box;
+                            }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+                            body {
+                                font-family: 'Georgia', serif;
+                                line-height: 1.6;
+                                color: #2c2c2c;
+                                background: #f5f3f0;
+                                overflow-x: hidden;
+                            }
 
-        .hero-section h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
-        }
+                            .hero-section {
+                                background: url('/images/about.jpeg');
+                                background-size: cover;
+                                background-position: center;
+                                background-attachment: fixed;
+                                color: rgb(109, 58, 58);
+                                padding: 120px 20px 80px;
+                                text-align: center;
+                                position: relative;
+                                overflow: hidden;
+                            }
 
-        .hero-section .tagline {
-            font-size: 1.3rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            opacity: 0.9;
-            font-style: italic;
-            animation: fadeInUp 1s ease 0.3s both;
-        }
+                            .hero-section::before {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                bottom: 0;
+                                background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="/images/about.jpeg"><rect width="100" height="100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>');
+                                background-size: 50px 50px;
+                                opacity: 0.2;
+                            }
 
-        .established {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 40px;
-            border: 2px solid rgba(139, 119, 101, 0.6);
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            animation: fadeIn 1s ease 0.6s both;
-            background: rgba(119, 60, 60, 0.1);
-        }
+                            .hero-content {
+                                position: relative;
+                                z-index: 1;
+                                max-width: 900px;
+                                margin: 0 auto;
+                            }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+                            .hero-section h1 {
+                                font-size: 3.5rem;
+                                font-weight: 300;
+                                letter-spacing: 3px;
+                                margin-bottom: 20px;
+                                animation: fadeInDown 1s ease;
+                            }
 
-        .intro-section {
-            padding: 100px 20px;
-            background: #f5f3f0;
-            text-align: center;
-        }
+                            .hero-section .tagline {
+                                font-size: 1.3rem;
+                                font-weight: 300;
+                                letter-spacing: 2px;
+                                opacity: 0.9;
+                                font-style: italic;
+                                animation: fadeInUp 1s ease 0.3s both;
+                            }
 
-        .intro-section h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: #6d3030;
-            letter-spacing: 2px;
-        }
+                            .established {
+                                display: inline-block;
+                                margin-top: 30px;
+                                padding: 15px 40px;
+                                border: 2px solid rgba(139, 119, 101, 0.6);
+                                font-size: 1.1rem;
+                                letter-spacing: 3px;
+                                animation: fadeIn 1s ease 0.6s both;
+                                background: rgba(119, 60, 60, 0.1);
+                            }
 
-        .intro-text {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.2rem;
-            line-height: 2;
-            color: #5a5a5a;
-            font-family: 'Garamond', serif;
-        }
+                            .container {
+                                max-width: 1200px;
+                                margin: 0 auto;
+                                padding: 0 20px;
+                            }
 
-        .stats-section {
-            background: linear-gradient(rgba(107, 60, 60, 0.92), rgba(100, 53, 53, 0.92)), 
-                        url('https://images.unsplash.com/photo-1604871000636-074fa5117945?w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 80px 20px;
-        }
+                            .intro-section {
+                                padding: 100px 20px;
+                                background: #f5f3f0;
+                                text-align: center;
+                            }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+                            .intro-section h2 {
+                                font-size: 2.5rem;
+                                font-weight: 300;
+                                margin-bottom: 30px;
+                                color: #6d3030;
+                                letter-spacing: 2px;
+                            }
 
-        .stat-item {
-            text-align: center;
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
+                            .intro-text {
+                                max-width: 800px;
+                                margin: 0 auto;
+                                font-size: 1.2rem;
+                                line-height: 2;
+                                color: #5a5a5a;
+                                font-family: 'Garamond', serif;
+                            }
 
-        .stat-item:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255,255,255,0.3);
-        }
+                            .stats-section {
+                                background: linear-gradient(rgba(107, 60, 60, 0.92), rgba(100, 53, 53, 0.92)),
+                                    url('https://images.unsplash.com/photo-1604871000636-074fa5117945?w=1600&q=80');
+                                background-size: cover;
+                                background-position: center;
+                                background-attachment: fixed;
+                                color: white;
+                                padding: 80px 20px;
+                            }
 
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 300;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #c9a87c, #e8d4b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+                            .stats-grid {
+                                display: grid;
+                                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                gap: 50px;
+                                max-width: 1000px;
+                                margin: 0 auto;
+                            }
 
-        .stat-label {
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.8;
-        }
+                            .stat-item {
+                                text-align: center;
+                                padding: 30px;
+                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                transition: transform 0.3s ease, border-color 0.3s ease;
+                            }
 
-        .expertise-section {
-            padding: 100px 20px;
-            background: #ffffff;
-        }
+                            .stat-item:hover {
+                                transform: translateY(-10px);
+                                border-color: rgba(255, 255, 255, 0.3);
+                            }
 
-        .expertise-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 70px;
-            color: #5f2a2a;
-            letter-spacing: 2px;
-        }
+                            .stat-number {
+                                font-size: 3.5rem;
+                                font-weight: 300;
+                                margin-bottom: 10px;
+                                background: linear-gradient(135deg, #c9a87c, #e8d4b0);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                background-clip: text;
+                            }
 
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+                            .stat-label {
+                                font-size: 1rem;
+                                letter-spacing: 2px;
+                                text-transform: uppercase;
+                                opacity: 0.8;
+                            }
 
-        .expertise-card {
-            background: #f5f3f0;
-            padding: 50px 40px;
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
+                            .expertise-section {
+                                padding: 100px 20px;
+                                background: #ffffff;
+                            }
 
-        .expertise-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(139, 119, 101, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
+                            .expertise-section h2 {
+                                text-align: center;
+                                font-size: 2.5rem;
+                                font-weight: 300;
+                                margin-bottom: 70px;
+                                color: #5f2a2a;
+                                letter-spacing: 2px;
+                            }
 
-        .expertise-card:hover::before {
-            left: 100%;
-        }
+                            .expertise-grid {
+                                display: grid;
+                                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                                gap: 40px;
+                                max-width: 1200px;
+                                margin: 0 auto;
+                            }
 
-        .expertise-card:hover {
-            background: white;
-            border-color: #8b7765;
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(42, 82, 95, 0.15);
-        }
+                            .expertise-card {
+                                background: #f5f3f0;
+                                padding: 50px 40px;
+                                text-align: center;
+                                transition: all 0.4s ease;
+                                border: 1px solid transparent;
+                                position: relative;
+                                overflow: hidden;
+                            }
 
-        .expertise-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #8b7765;
-        }
+                            .expertise-card::before {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                left: -100%;
+                                width: 100%;
+                                height: 100%;
+                                background: linear-gradient(90deg, transparent, rgba(139, 119, 101, 0.1), transparent);
+                                transition: left 0.5s ease;
+                            }
 
-        .expertise-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: 400;
-            letter-spacing: 1px;
-        }
+                            .expertise-card:hover::before {
+                                left: 100%;
+                            }
 
-        .expertise-card p {
-            color: #666;
-            line-height: 1.8;
-        }
+                            .expertise-card:hover {
+                                background: white;
+                                border-color: #8b7765;
+                                transform: translateY(-5px);
+                                box-shadow: 0 20px 40px rgba(42, 82, 95, 0.15);
+                            }
 
-        .values-section {
-            background: linear-gradient(rgba(145, 82, 82, 0.93), rgba(83, 46, 46, 0.93)), 
-                        url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            padding: 100px 20px;
-        }
+                            .expertise-icon {
+                                font-size: 3rem;
+                                margin-bottom: 20px;
+                                color: #8b7765;
+                            }
 
-        .values-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 70px;
-            letter-spacing: 2px;
-        }
+                            .expertise-card h3 {
+                                font-size: 1.5rem;
+                                margin-bottom: 15px;
+                                font-weight: 400;
+                                letter-spacing: 1px;
+                            }
 
-        .values-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+                            .expertise-card p {
+                                color: #666;
+                                line-height: 1.8;
+                            }
 
-        .value-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.6s ease;
-        }
+                            .values-section {
+                                background: linear-gradient(rgba(145, 82, 82, 0.93), rgba(83, 46, 46, 0.93)),
+                                    url('https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1600&q=80');
+                                background-size: cover;
+                                background-position: center;
+                                background-attachment: fixed;
+                                color: white;
+                                padding: 100px 20px;
+                            }
 
-        .value-item.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+                            .values-section h2 {
+                                text-align: center;
+                                font-size: 2.5rem;
+                                font-weight: 300;
+                                margin-bottom: 70px;
+                                letter-spacing: 2px;
+                            }
 
-        .value-number {
-            font-size: 4rem;
-            font-weight: 300;
-            color: #c9a87c;
-            margin-right: 30px;
-            line-height: 1;
-        }
+                            .values-container {
+                                max-width: 900px;
+                                margin: 0 auto;
+                            }
 
-        .value-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            font-weight: 400;
-            letter-spacing: 1px;
-        }
+                            .value-item {
+                                display: flex;
+                                align-items: flex-start;
+                                margin-bottom: 50px;
+                                opacity: 0;
+                                transform: translateX(-50px);
+                                transition: all 0.6s ease;
+                            }
 
-        .value-content p {
-            color: rgba(255,255,255,0.8);
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
+                            .value-item.visible {
+                                opacity: 1;
+                                transform: translateX(0);
+                            }
 
-        .cta-section {
-            background: linear-gradient(rgba(245, 243, 240, 0.95), rgba(245, 243, 240, 0.95)), 
-                        url('https://images.unsplash.com/photo-1556906770-92c4ff525e8d?w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            padding: 100px 20px;
-            text-align: center;
-        }
+                            .value-number {
+                                font-size: 4rem;
+                                font-weight: 300;
+                                color: #c9a87c;
+                                margin-right: 30px;
+                                line-height: 1;
+                            }
 
-        .cta-section h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: #5f2a2a;
-            letter-spacing: 2px;
-        }
+                            .value-content h3 {
+                                font-size: 1.8rem;
+                                margin-bottom: 10px;
+                                font-weight: 400;
+                                letter-spacing: 1px;
+                            }
 
-        .cta-section p {
-            font-size: 1.2rem;
-            color: #5a5a5a;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+                            .value-content p {
+                                color: rgba(255, 255, 255, 0.8);
+                                line-height: 1.8;
+                                font-size: 1.1rem;
+                            }
 
-        .cta-button {
-            display: inline-block;
-            padding: 18px 60px;
-            background: #5f2a2a;
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            border: 2px solid #5f2a2a;
-        }
+                            .cta-section {
+                                background: linear-gradient(rgba(245, 243, 240, 0.95), rgba(245, 243, 240, 0.95)),
+                                    url('https://images.unsplash.com/photo-1556906770-92c4ff525e8d?w=1600&q=80');
+                                background-size: cover;
+                                background-position: center;
+                                padding: 100px 20px;
+                                text-align: center;
+                            }
 
-        .cta-button:hover {
-            background: #8b7765;
-            border-color: #8b7765;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(42, 82, 95, 0.3);
-        }
+                            .cta-section h2 {
+                                font-size: 2.5rem;
+                                font-weight: 300;
+                                margin-bottom: 30px;
+                                color: #5f2a2a;
+                                letter-spacing: 2px;
+                            }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+                            .cta-section p {
+                                font-size: 1.2rem;
+                                color: #5a5a5a;
+                                margin-bottom: 40px;
+                                max-width: 700px;
+                                margin-left: auto;
+                                margin-right: auto;
+                            }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+                            .cta-button {
+                                display: inline-block;
+                                padding: 18px 60px;
+                                background: #5f2a2a;
+                                color: white;
+                                text-decoration: none;
+                                font-size: 1.1rem;
+                                letter-spacing: 2px;
+                                text-transform: uppercase;
+                                transition: all 0.3s ease;
+                                border: 2px solid #5f2a2a;
+                            }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+                            .cta-button:hover {
+                                background: #8b7765;
+                                border-color: #8b7765;
+                                transform: translateY(-2px);
+                                box-shadow: 0 10px 30px rgba(42, 82, 95, 0.3);
+                            }
 
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2.5rem;
-            }
+                            @keyframes fadeInDown {
+                                from {
+                                    opacity: 0;
+                                    transform: translateY(-30px);
+                                }
 
-            .hero-section .tagline {
-                font-size: 1.1rem;
-            }
+                                to {
+                                    opacity: 1;
+                                    transform: translateY(0);
+                                }
+                            }
 
-            .intro-section h2,
-            .expertise-section h2,
-            .values-section h2,
-            .cta-section h2 {
-                font-size: 2rem;
-            }
+                            @keyframes fadeInUp {
+                                from {
+                                    opacity: 0;
+                                    transform: translateY(30px);
+                                }
 
-            .value-item {
-                flex-direction: column;
-            }
+                                to {
+                                    opacity: 1;
+                                    transform: translateY(0);
+                                }
+                            }
 
-            .value-number {
-                margin-bottom: 20px;
-            }
+                            @keyframes fadeIn {
+                                from {
+                                    opacity: 0;
+                                }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-    </style>
+                                to {
+                                    opacity: 1;
+                                }
+                            }
+
+                            @media (max-width: 768px) {
+                                .hero-section h1 {
+                                    font-size: 2.5rem;
+                                }
+
+                                .hero-section .tagline {
+                                    font-size: 1.1rem;
+                                }
+
+                                .intro-section h2,
+                                .expertise-section h2,
+                                .values-section h2,
+                                .cta-section h2 {
+                                    font-size: 2rem;
+                                }
+
+                                .value-item {
+                                    flex-direction: column;
+                                }
+
+                                .value-number {
+                                    margin-bottom: 20px;
+                                }
+
+                                .stats-grid {
+                                    grid-template-columns: 1fr;
+                                    gap: 30px;
+                                }
+                            }
+                        </style>
 </head>
+
 <body>
 
     <%- include ('partials/header.ejs') %>
-    
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>ABOUT US</h1>
-            <p class="tagline">Weaving Excellence into Every Thread</p>
-            <div class="established">ESTABLISHED 2002</div>
-        </div>
-    </section>
 
-    <section class="intro-section">
-        <div class="container">
-            <h2>Our Legacy</h2>
-            <p class="intro-text">
-                For over two decades, we have been a trusted name in the fabric trading industry, connecting premium textile manufacturers with designers, retailers, and businesses across the market. Since our establishment in 2002, our vision has been simple — to offer high-quality fabrics, diverse collections, and dependable service under one roof. Today, we proudly serve as reliable fabric traders, known for our wide range, competitive pricing, and strong relationships within the textile industry.
-            </p>
-        </div>
-    </section>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>ABOUT US</h1>
+                <p class="tagline">Weaving Excellence into Every Thread</p>
+                <div class="established">ESTABLISHED 2002</div>
+            </div>
+        </section>
 
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">22+</div>
-                <div class="stat-label">Years of Excellence</div>
+        <section class="intro-section">
+            <div class="container">
+                <h2>Our Legacy</h2>
+                <p class="intro-text">
+                    For over two decades, we have been a trusted name in the fabric trading industry, connecting premium
+                    textile manufacturers with designers, retailers, and businesses across the market. Since our
+                    establishment in 2002, our vision has been simple — to offer high-quality fabrics, diverse
+                    collections, and dependable service under one roof. Today, we proudly serve as reliable fabric
+                    traders, known for our wide range, competitive pricing, and strong relationships within the textile
+                    industry.
+                </p>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Fabric Varieties</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">10K+</div>
-                <div class="stat-label">Satisfied Clients</div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="expertise-section">
-        <h2>Our Expertise</h2>
-        <div class="expertise-grid">
-            <div class="expertise-card">
-                <div class="expertise-icon">◈</div>
-                <h3>Natural Fibers</h3>
-                <p>Premium cotton, silk, linen, and wool sourced from the finest producers globally, ensuring authenticity and superior quality.</p>
-            </div>
-            <div class="expertise-card">
-                <div class="expertise-icon">◆</div>
-                <h3>Synthetic Excellence</h3>
-                <p>Cutting-edge polyester, nylon, and blended fabrics engineered for durability, performance, and innovation.</p>
-            </div>
-            <div class="expertise-card">
-                <div class="expertise-icon">◇</div>
-                <h3>Luxury Textiles</h3>
-                <p>Exclusive jacquards, brocades, and embroidered fabrics for haute couture and premium interior design.</p>
-            </div>
-            <div class="expertise-card">
-    <div class="expertise-icon">✦</div>
-    <h3>Wide Fabric Collection</h3>
-    <p>Explore a diverse range of premium fabrics including cotton, silk, chiffon, georgette, and more — perfect for every style and occasion.</p>
-</div>
-
-            <div class="expertise-card">
-                <div class="expertise-icon">◆</div>
-                <h3>Sustainable Options</h3>
-                <p>Eco-friendly and organic fabrics that meet the highest environmental standards without compromising quality.</p>
-            </div>
-            <div class="expertise-card">
-    <div class="expertise-icon">◇</div>
-    <h3>Customized Sourcing</h3>
-    <p>We help you source the right fabrics based on your specific design, quality, and budget requirements from trusted suppliers.</p>
-</div>
-
-        </div>
-    </section>
-
-    <section class="values-section">
-        <h2>Our Commitment</h2>
-        <div class="values-container">
-            <div class="value-item">
-                <div class="value-number">01</div>
-                <div class="value-content">
-                    <h3>Quality Without Compromise</h3>
-                    <p>Every fabric in our collection undergoes rigorous quality control. We partner only with manufacturers who share our commitment to excellence, ensuring that each thread meets our exacting standards.</p>
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">22+</div>
+                    <div class="stat-label">Years of Excellence</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Fabric Varieties</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Satisfied Clients</div>
                 </div>
             </div>
-            <div class="value-item">
-                <div class="value-number">02</div>
-                <div class="value-content">
-                    <h3>Industry-Leading Expertise</h3>
-                    <p>Our team brings together decades of combined experience in textile science, design, and commerce. We don't just sell fabrics—we provide expert consultation to help you make the perfect choice.</p>
+        </section>
+
+        <section class="expertise-section">
+            <h2>Our Expertise</h2>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <div class="expertise-icon">◈</div>
+                    <h3>Natural Fibers</h3>
+                    <p>Premium cotton, silk, linen, and wool sourced from the finest producers globally, ensuring
+                        authenticity and superior quality.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">◆</div>
+                    <h3>Synthetic Excellence</h3>
+                    <p>Cutting-edge polyester, nylon, and blended fabrics engineered for durability, performance, and
+                        innovation.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">◇</div>
+                    <h3>Luxury Textiles</h3>
+                    <p>Exclusive jacquards, brocades, and embroidered fabrics for haute couture and premium interior
+                        design.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">✦</div>
+                    <h3>Wide Fabric Collection</h3>
+                    <p>Explore a diverse range of premium fabrics including cotton, silk, chiffon, georgette, and more —
+                        perfect for every style and occasion.</p>
+                </div>
+
+                <div class="expertise-card">
+                    <div class="expertise-icon">◆</div>
+                    <h3>Sustainable Options</h3>
+                    <p>Eco-friendly and organic fabrics that meet the highest environmental standards without
+                        compromising quality.</p>
+                </div>
+                <div class="expertise-card">
+                    <div class="expertise-icon">◇</div>
+                    <h3>Customized Sourcing</h3>
+                    <p>We help you source the right fabrics based on your specific design, quality, and budget
+                        requirements from trusted suppliers.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="values-section">
+            <h2>Our Commitment</h2>
+            <div class="values-container">
+                <div class="value-item">
+                    <div class="value-number">01</div>
+                    <div class="value-content">
+                        <h3>Quality Without Compromise</h3>
+                        <p>Every fabric in our collection undergoes rigorous quality control. We partner only with
+                            manufacturers who share our commitment to excellence, ensuring that each thread meets our
+                            exacting standards.</p>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">02</div>
+                    <div class="value-content">
+                        <h3>Industry-Leading Expertise</h3>
+                        <p>Our team brings together decades of combined experience in textile science, design, and
+                            commerce. We don't just sell fabrics—we provide expert consultation to help you make the
+                            perfect choice.</p>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">03</div>
+                    <div class="value-content">
+                        <h3>Comprehensive Selection</h3>
+                        <p>From delicate silks to industrial-grade synthetics, our inventory spans the complete spectrum
+                            of textile possibilities. Whatever your project demands, we have the perfect fabric
+                            solution.</p>
+                    </div>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">04</div>
+                    <div class="value-content">
+                        <h3>Client-Centric Service</h3>
+                        <p>Your success is our mission. We provide personalized service, competitive pricing, and
+                            reliable delivery that has earned us the trust of thousands of clients worldwide.</p>
+                    </div>
                 </div>
             </div>
-            <div class="value-item">
-                <div class="value-number">03</div>
-                <div class="value-content">
-                    <h3>Comprehensive Selection</h3>
-                    <p>From delicate silks to industrial-grade synthetics, our inventory spans the complete spectrum of textile possibilities. Whatever your project demands, we have the perfect fabric solution.</p>
-                </div>
-            </div>
-            <div class="value-item">
-                <div class="value-number">04</div>
-                <div class="value-content">
-                    <h3>Client-Centric Service</h3>
-                    <p>Your success is our mission. We provide personalized service, competitive pricing, and reliable delivery that has earned us the trust of thousands of clients worldwide.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="cta-section">
-        <h2>Experience the Difference</h2>
-        <p>Discover why industry professionals have trusted us for over two decades. Let our expertise elevate your next project.</p>
-        <button onclick="location.href='/contact#contact-method'" class="cta-button">Get in Touch</button>
-    </section>
+        <section class="cta-section">
+            <h2>Experience the Difference</h2>
+            <p>Discover why industry professionals have trusted us for over two decades. Let our expertise elevate your
+                next project.</p>
+            <button onclick="location.href='/contact#contact-method'" class="cta-button">Get in Touch</button>
+        </section>
 
-    <script>
-        // Animate stats on scroll
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
-        };
+        <script>
+            // Animate stats on scroll
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
 
-        const animateStats = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const statNumbers = entry.target.querySelectorAll('.stat-number');
-                    statNumbers.forEach(stat => {
-                        const finalValue = stat.textContent;
-                        const numericValue = parseInt(finalValue.replace(/\D/g, ''));
-                        const suffix = finalValue.replace(/[0-9]/g, '');
-                        
-                        let current = 0;
-                        const increment = numericValue / 50;
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if (current >= numericValue) {
-                                stat.textContent = numericValue + suffix;
-                                clearInterval(timer);
-                            } else {
-                                stat.textContent = Math.floor(current) + suffix;
-                            }
-                        }, 30);
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
+            const animateStats = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statNumbers = entry.target.querySelectorAll('.stat-number');
+                        statNumbers.forEach(stat => {
+                            const finalValue = stat.textContent;
+                            const numericValue = parseInt(finalValue.replace(/\D/g, ''));
+                            const suffix = finalValue.replace(/[0-9]/g, '');
 
-        const statsObserver = new IntersectionObserver(animateStats, observerOptions);
-        const statsSection = document.querySelector('.stats-section');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
+                            let current = 0;
+                            const increment = numericValue / 50;
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= numericValue) {
+                                    stat.textContent = numericValue + suffix;
+                                    clearInterval(timer);
+                                } else {
+                                    stat.textContent = Math.floor(current) + suffix;
+                                }
+                            }, 30);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
 
-        // Animate value items on scroll
-        const animateValues = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
-
-        const valuesObserver = new IntersectionObserver(animateValues, {
-            threshold: 0.3,
-            rootMargin: '0px'
-        });
-
-        const valueItems = document.querySelectorAll('.value-item');
-        valueItems.forEach((item, index) => {
-            item.style.transitionDelay = `${index * 0.2}s`;
-            valuesObserver.observe(item);
-        });
-
-        // Smooth scroll for CTA button
-        document.querySelector('.cta-button').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Parallax effect on hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-section');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            const statsObserver = new IntersectionObserver(animateStats, observerOptions);
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) {
+                statsObserver.observe(statsSection);
             }
-        });
-    </script>
+
+            // Animate value items on scroll
+            const animateValues = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const valuesObserver = new IntersectionObserver(animateValues, {
+                threshold: 0.3,
+                rootMargin: '0px'
+            });
+
+            const valueItems = document.querySelectorAll('.value-item');
+            valueItems.forEach((item, index) => {
+                item.style.transitionDelay = `${index * 0.2}s`;
+                valuesObserver.observe(item);
+            });
+
+            // Smooth scroll for CTA button
+            document.querySelector('.cta-button').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Parallax effect on hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero-section');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+        </script>
 </body>
+
 </html>
