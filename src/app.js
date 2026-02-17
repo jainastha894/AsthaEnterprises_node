@@ -10,6 +10,8 @@ import { passportConfig } from "./config/passportConfig.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import pageRoutes from "./routes/pageRoutes.js";
 import { sitemapRouter } from "./routes/sitemapRoutes.js";
+import MongoStore from "connect-mongo";
+
 dotenv.config({
   path: path.resolve(process.cwd(), ".env"),
 });
@@ -33,6 +35,7 @@ connectDB();
 //session config
 app.use(
   session({
+    store: MongoStore.create({ mongoUrl: process.env.MONGOURL }),
     name: "admin.sid",          // cookie name
     secret: "super-secret-key", // session sign key
     resave: false,
@@ -40,8 +43,7 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 60 * 6,   // 60 days *6
-      minAge: 1000 * 60 * 60 * 24 * 60 * 6,  // 60 days *6
-
+      // minAge is not a standard express-session option, removing it unless it's custom middleware logic (but it doesn't seem to be used by express-session)
     },
   })
 );
