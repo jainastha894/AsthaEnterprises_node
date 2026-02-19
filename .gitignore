@@ -39,3 +39,4 @@ coverage/
 *.pid.lock
 
 .env
+/public/uploads/

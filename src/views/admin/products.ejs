@@ -246,12 +246,12 @@
                 let badges = '';
                 if (product.active) badges += '<span class="badge badge-active">Active</span>';
                 else badges += '<span class="badge badge-inactive" style="background: #f44336 !important; color: #ffffff !important;">Inactive</span>';
-                if (product.featured) badges += '<span class="badge badge-featured" style="background: #412222 !important; color: #000000 !important;">Featured</span>';
-                if (product.topRated) badges += '<span class="badge badge-featured" style="background: #412222 !important; color: #000000 !important;">Top Rated</span>';
-                if (product.bestSeller) badges += '<span class="badge badge-featured" style="background: #412222 !important; color: #000000 !important;">Best Seller</span>';
-                if (product.onSale) badges += '<span class="badge badge-featured" style="background: #412222 !important; color: #000000 !important;">On Sale</span>';
-                if (product.outofstock) badges += '<span class="badge badge-inactive" style="background: #f44336 !important; color: #ffffff !important;">Out of Stock</span>';
-                if (product.signature) badges += '<span class="badge badge-featured" style="background: #412222; color: #000;">Signature</span>';
+                if (product.featured) badges += '<span class="badge badge-featured" style="background: #ffffff !important; color: #000000 !important;">Featured</span>';
+                if (product.topRated) badges += '<span class="badge badge-featured" style="background: #ffffff !important; color: #000000 !important;">Top Rated</span>';
+                if (product.bestSeller) badges += '<span class="badge badge-featured" style="background: #ffffff !important; color: #000000 !important;">Best Seller</span>';
+                if (product.onSale) badges += '<span class="badge badge-featured" style="background: #ffffff !important; color: #000000 !important;">On Sale</span>';
+                if (product.outofstock) badges += '<span class="badge badge-inactive" style="background: #ffffff !important; color: #ffffff !important;">Out of Stock</span>';
+                if (product.signature) badges += '<span class="badge badge-featured" style="background: #ffffff; color: #000;">Signature</span>';
                 
                 const firstImage = (product.images && product.images.length > 0) 
                     ? product.images[0] 
@@ -281,8 +281,8 @@
                         <img src="${firstImage}" alt="${product.name}" class="product-image-cell" onerror="this.src='/uploads/default.png'">
                     </td>
                     <td>${product.name}</td>
-                    <td style="color: #ffffff !important;">${categoryDisplay}</td>
-                    <td style="color: #ffffff !important;">${widthDisplay}</td>
+                    <td style="color: #ff0000 !important;">${categoryDisplay}</td>
+                    <td style="color: #ff0000 !important;">${widthDisplay}</td>
                     <td>${badges}</td>
                     <td>
                         <div class="action-buttons" style="display: flex; flex-direction: column; gap: 6px;">
@@ -301,7 +301,7 @@
                             <button 
                                 class="btn-icon ${product.signature ? 'btn-active' : 'btn-inactive'}" 
                                 onclick="toggleSignature('${product._id}', ${product.signature})"
-                                style="padding: 6px 12px; font-width: 12px; min-width: 100px; background: ${product.signature ? '#412222' : '#6c757d'}; color: ${product.signature ? '#000' : '#fff'};">
+                                style="padding: 6px 12px; font-width: 12px; min-width: 100px; background: ${product.signature ? '#ffffff' : '#6c757d'}; color: ${product.signature ? '#000' : '#fff'};">
                                 ${product.signature ? 'Remove Signature' : 'Add Signature'}
                             </button>
                         </div>

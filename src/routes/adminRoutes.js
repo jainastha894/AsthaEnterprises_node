@@ -58,7 +58,7 @@ router.post(
   "/admin/products/add",
   isAdminAuth,
   (req, res, next) => {
-    upload.array("productImages", 10)(req, res, (err) => {
+    upload.array("productImages", 100)(req, res, (err) => {
       if (err) {
         console.error("Multer upload error:", err);
         if (err.code === 'LIMIT_FILE_SIZE') {
@@ -80,7 +80,7 @@ router.post(
   "/admin/products/edit/:id",
   isAdminAuth,
   (req, res, next) => {
-    upload.array("productImages", 10)(req, res, (err) => {
+    upload.array("productImages", 100)(req, res, (err) => {
       if (err) {
         console.error("Multer upload error:", err);
         if (err.code === 'LIMIT_FILE_SIZE') {

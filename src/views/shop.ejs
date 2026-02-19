@@ -839,36 +839,34 @@
             renderProducts(sorted);
           });
 
-          // Desktop filter buttons
-          //deleted the code
+          // Modal controls - ATTACH HERE
+          const closeModalBtn = document.getElementById('closeModal');
+          const xModalBtn = document.getElementById('xModal');
 
-          // Mobile sheet
-          //deleted the code
-
-          // Modal controls
-          document.getElementById('closeModal').addEventListener('click', closeProductModal);
-          document.getElementById('xModal').addEventListener('click', closeProductModal);
+          if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeProductModal);
+          }
+          if (xModalBtn) {
+            xModalBtn.addEventListener('click', closeProductModal);
+          }
         }
+
         // Modal - Make it globally accessible
         window.openProductModal = function (id) {
-
           console.log("Opening product modal for ID:", id);
-
-
           console.log("PRODUCTS:", PRODUCTS);
           const p = PRODUCTS.find(p => p._id === id);
-
           console.log(p);
-          // Use product images array, fallback to single image
-          const images =
-            (Array.isArray(p.images) && p.images.length)
-              ? p.images
-              : ["/uploads/default.png"];
 
+          if (!p) {
+            console.error('Product not found for id:', id);
+            return;
+          }
+
+          const images = (Array.isArray(p.images) && p.images.length) ? p.images : ["/uploads/default.png"];
 
           const content = `
     <div class="flex flex-col md:grid md:grid-cols-2 gap-6">
-
       <!-- LEFT: main image + thumbnails -->
       <div class="flex flex-col gap-3 w-full">
         <!-- Main image box -->
@@ -884,23 +882,30 @@
           ` : ''}
             
           <img
-  id="mainProductImage"
-  src="${images[0]}"
-  alt="${p.name}"
-  class="w-full h-[430px] md:h-[500px] object-contain bg-white rounded-lg ${p.outofstock ? 'opacity-50' : ''}"
-  onerror="this.src='/uploads/default.png'"
-/>
-
+            id="mainProductImage"
+            src="${images[0]}"
+            alt="${p.name}"
+            class="w-full h-[430px] md:h-[500px] object-contain bg-white rounded-lg ${p.outofstock ? 'opacity-50' : ''}"
+            onerror="this.src='/uploads/default.png'"
+          />
         </div>
 
-        <!-- Thumbnails row -->
-        <div class="flex gap-2 overflow-x-auto">
+        <!-- VIEW ALL BUTTON (above thumbnails) -->
+        <button 
+          id="viewAllImagesBtn"
+          class="w-full py-2 px-4 bg-[color:var(--gold)] text-black font-semibold rounded-lg hover:bg-yellow-600 transition text-sm"
+        >
+          📸 View All Images (${images.length})
+        </button>
+
+        <!-- Thumbnails row (scrollable) -->
+        <div class="flex gap-2 overflow-x-auto pb-2">
           ${images.map((img, index) => `
             <button
               type="button"
-              class="thumbnail-btn shrink-0 rounded-lg overflow-hidden border relative ${index === 0 ? 'border-2 border-[color:var(--gold)]' : 'border border-gray-200'}
-"
+              class="thumbnail-btn shrink-0 rounded-lg overflow-hidden border relative ${index === 0 ? 'border-2 border-[color:var(--gold)]' : 'border border-gray-200'}"
               data-img="${img}"
+              title="Image ${index + 1} of ${images.length}"
             >
               ${p.outofstock ? '<div class="absolute inset-0 bg-black/50 z-10"></div>' : ''}
               <img
@@ -908,101 +913,83 @@
                 alt="${p.name} thumbnail ${index + 1}"
                 class="w-16 h-16 object-cover ${p.outofstock ? 'opacity-50' : ''}"
                 onerror="this.src='/uploads/default.png'"
+                loading="lazy"
               />
+              <span style="position:absolute;bottom:2px;right:2px;background:#000;color:#fff;font-size:9px;padding:2px 4px;border-radius:3px;">${index + 1}/${images.length}</span>
             </button>
           `).join('')}
         </div>
       </div>
 
       <!-- RIGHT: product details -->
-
       <div class="w-full flex flex-col">
-       ${Array.isArray(p.units?.categoryList)
-              ? p.units.categoryList.map(item => `
-      <span class="chip px-3 py-1 rounded-full text-xs">
-        ${item}
-      </span>
-    `).join("")
-              : ""
-            }
+        ${Array.isArray(p.units?.categoryList)
+          ? p.units.categoryList.map(item => `
+            <span class="chip px-3 py-1 rounded-full text-xs">
+              ${item}
+            </span>
+          `).join("")
+          : ""
+        }
 
-                    <h1 class="cormorant font-black text-base sm:text-3xl text-black-1500 leading-snug mt-3">${p.name}</h1>
-
+        <h1 class="cormorant font-black text-base sm:text-3xl text-black-1500 leading-snug mt-3">${p.name}</h1>
         <p class="text-gray-600 mt-4">${p.description}</p>
-        <p class="text-gray-600 mt-4">${p.hsncode}</p>
+        <p class="text-gray-600 mt-4">HSN Code: ${p.hsnCode}</p>
+        
         ${Array.isArray(p.units?.printingqualityList)
-              ? p.units.printingqualityList.map(item => `
-      <span class="chip px-3 py-1 rounded-full text-xs">
-        ${item}
-      </span>
-    `).join("")
-              : ""
-            }
-              ${Array.isArray(p.units?.printplainList)
-              ? p.units.printplainList.map(item => `
-      <span class="chip px-3 py-1 rounded-full text-xs">
-        ${item}
-      </span>
-    `).join("")
-              : ""
-            }
+          ? p.units.printingqualityList.map(item => `
+            <span class="chip px-3 py-1 text-xs">
+              printing quality: ${item}
+            </span>
+          `).join("")
+          : ""
+        }
+        ${Array.isArray(p.units?.printplainList)
+          ? p.units.printplainList.map(item => `
+            <span class="chip px-3 py-1 text-xs">
+              ${item} item
+            </span>
+          `).join("")
+          : ""
+        }
 
         <div class="mt-5 grid grid-cols-1 gap-4 text-sm">
+          <!-- WIDTH DROPDOWN -->
+          <div class="border border-gray-200 rounded-lg p-3">
+            <label class="text-gray-500 block mb-1">Width</label>
+            <select id="widthSelect" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-[color:var(--gold)] focus:border-[color:var(--gold)]">
+              <option value="">All</option>
+              ${(p.units?.widthList || []).map(s => `<option value="${s}">${s}</option>`).join("")}
+            </select>
+          </div>
 
-<!-- WIDTH DROPDOWN (ALL INDUSTRIES) -->
-<div class="border border-gray-200 rounded-lg p-3">
-  <label class="text-gray-500 block mb-1">Width</label>
+          <!-- COLOR DROPDOWN -->
+          ${p.units.colorList?.length
+            ? `
+            <div class="border border-gray-200 rounded-lg p-3">
+              <label class="text-gray-500 block mb-1">Colors Available</label>
+              <select id="colorSelect" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-[color:var(--gold)] focus:border-[color:var(--gold)]">
+                ${p.units.colorList.map(f => `<option value="${f}">${f}</option>`).join("")}
+              </select>
+            </div>
+          `
+            : ""
+          }
 
-  <select id="widthSelect"
-    class="w-full rounded-md border border-gray-300 px-3 py-2
-           focus:ring-2 focus:ring-[color:var(--gold)]
-           focus:border-[color:var(--gold)]">
-
-           <option value="">All</option>
-    ${(p.units?.widthList || ["Standard"])
-              .map(s => `<option value="${s}">${s}</option>`)
-              .join("")}
-
-  </select>
-</div>
-
-
- ${p.units.colorList?.length
-              ? `
-    <div class="border border-gray-200 rounded-lg p-3">
-      <label class="text-gray-500 block mb-1">Colors Available</label>
-
-      <select
-        id="colorSelect"
-        class="w-full rounded-md border border-gray-300 px-3 py-2
-               focus:ring-2 focus:ring-[color:var(--gold)]
-               focus:border-[color:var(--gold)]"
-      >
-        ${p.units.colorList
-                .map(f => `<option value="${f}">${f}</option>`)
-                .join("")}
-      </select>
-    </div>
-  `
-              : ""
-            }
-
-
-        <div class="mt-auto pt-4 md:px-4">
-          <a
-            id="productWhatsAppBtn"
-            href="https://wa.me/919818926023?text=${encodeURIComponent(
-              `Hi I am interested in ${p.name}\n${BASE_URL}${images[0]}`
-            )}"
-            target="_blank"
-            onclick="if(typeof trackWhatsAppClick === 'function') trackWhatsAppClick('${p._id}', '${p.name.replace(/'/g, "\\'")}', '${(p.units?.industryList?.[0] || '').replace(/'/g, "\\'")}', 'product');"
-            class="gold-btn w-full mt-2 py-3 rounded-lg text-sm font-semibold flex items-center justify-center gap-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-5 h-5 fill-white">
-              <path d="M16 .5C7.44.5.5 7.44.5 16c0 2.83.74 5.59 2.15 8.02L.5 31.5l7.7-2.07C10.35 30.27 13.12 31 16 31c8.56 0 15.5-6.94 15.5-15.5S24.56.5 16 .5zm0 28c-2.5 0-4.94-.67-7.06-1.93l-.5-.29-4.57 1.23 1.23-4.57-.29-.5C3.67 20.94 3 18.5 3 16 3 8.82 8.82 3 16 3s13 5.82 13 13-5.82 13-13 13zm7.2-9.98c-.39-.2-2.3-1.13-2.66-1.26-.36-.13-.63-.2-.9.2s-1.03 1.26-1.27 1.52c-.23.26-.47.29-.86.1-.39-.2-1.63-.6-3.1-1.92-1.15-1.02-1.92-2.3-2.15-2.69-.23-.39-.02-.6.17-.79.17-.17.39-.46.59-.69.2-.23.26-.39.39-.65.13-.26.07-.49-.03-.69-.1-.2-.9-2.17-1.24-2.97-.33-.8-.67-.69-.9-.7h-.77c-.26 0-.69.1-1.05.49-.36.39-1.37 1.34-1.37 3.26s1.4 3.77 1.59 4.03c.2.26 2.75 4.2 6.67 5.89.93.4 1.65.64 2.21.82.93.3 1.78.26 2.45.16.75-.11 2.3-.94 2.62-1.84.33-.9.33-1.67.23-1.84-.1-.17-.36-.26-.75-.46z"/>
-            </svg>
-            WhatsApp
-          </a>
+          <!-- WHATSAPP BUTTON -->
+          <div class="mt-auto pt-4">
+            <a id="productWhatsAppBtn"
+              href="https://wa.me/919818926023?text=Hi%20I%20am%20interested%20in%20${encodeURIComponent(p.name)}"
+              target="_blank"
+              onclick="event.stopPropagation(); if(typeof trackWhatsAppClick === 'function') trackWhatsAppClick('${p._id}', '${p.name.replace(/'/g, "\\'")}', '${(p.units?.industryList?.[0] || '').replace(/'/g, "\\'")}', 'product');"
+              class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1DA851] text-white font-semibold rounded-lg py-2 sm:py-2.5 text-[13px] sm:text-[15px] min-h-[44px] transition-all duration-200 active:scale-95"
+              style="padding-right: 12px; padding-left: 12px;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-[18px] h-[18px] sm:w-5 sm:h-5 fill-white flex-shrink-0">
+                <path d="M16 .5C7.44.5.5 7.44.5 16c0 2.83.74 5.59 2.15 8.02L.5 31.5l7.7-2.07C10.35 30.27 13.12 31 16 31c8.56 0 15.5-6.94 15.5-15.5S24.56.5 16 .5zm0 28c-2.5 0-4.94-.67-7.06-1.93l-.5-.29-4.57 1.23 1.23-4.57-.29-.5C3.67 20.94 3 18.5 3 16 3 8.82 8.82 3 16 3s13 5.82 13 13-5.82 13-13 13z"/>
+              </svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1014,92 +1001,348 @@
           modal.classList.add('grid');
           document.body.style.overflow = 'hidden';
 
-          const closeBtn = modal.querySelector('#xModal');
-          if (closeBtn) {
-            closeBtn.addEventListener('click', closeProductModal);
-          }
+          // ===== FULLSCREEN IMAGE VIEWER LOGIC =====
+          setupFullscreenImageViewer(images, p);
 
-          // Thumbnail click logic
+          // ===== EXISTING THUMBNAIL & WHATSAPP LOGIC =====
           const mainImgEl = modal.querySelector('#mainProductImage');
           const waBtn = modal.querySelector('#productWhatsAppBtn');
           const thumbBtns = modal.querySelectorAll('.thumbnail-btn');
-
           const widthSelect = modal.querySelector('#widthSelect');
           const colorSelect = modal.querySelector('#colorSelect');
 
-          // Build WhatsApp message
           function updateWhatsApp(imgPath = images[0]) {
-            // Ensure absolute URL using BASE_URL
-            const imgUrl = imgPath.startsWith('http')
-              ? imgPath
-              : BASE_URL + (imgPath.startsWith('/') ? imgPath : '/' + imgPath);
-
+            const imgUrl = imgPath.startsWith('http') ? imgPath : BASE_URL + (imgPath.startsWith('/') ? imgPath : '/' + imgPath);
             const widthVal = widthSelect ? widthSelect.value : '';
             const colorVal = colorSelect ? colorSelect.value : '';
-
-            let msg =
-              `Hi I am interested in ${p.name}\n` +
-              (widthVal ? `Width: ${widthVal}\n` : '') +
-              (colorVal ? `Color: ${colorVal}\n` : '') +
-              `\n${imgUrl}`;
-
+            let msg = `Hi I am interested in ${p.name}\n` + (widthVal ? `Width: ${widthVal}\n` : '') + (colorVal ? `Color: ${colorVal}\n` : '') + `\n${imgUrl}`;
             waBtn.href = `https://wa.me/919818926023?text=${encodeURIComponent(msg)}`;
           }
 
-          // Initial WhatsApp message
           updateWhatsApp(images[0]);
 
-          // Thumbnail click
           thumbBtns.forEach(btn => {
             btn.addEventListener('click', () => {
               const imgName = btn.dataset.img;
-
               mainImgEl.src = imgName;
-
               thumbBtns.forEach(b => {
                 b.classList.remove('border-2', 'border-[color:var(--gold)]');
                 b.classList.add('border', 'border-gray-200');
               });
               btn.classList.remove('border', 'border-gray-200');
               btn.classList.add('border-2', 'border-[color:var(--gold)]');
-
               updateWhatsApp(imgName);
             });
           });
 
-          // Width change
           if (widthSelect) {
             widthSelect.addEventListener('change', () => {
-              // Extract path from src (remove origin if present)
               const imgPath = mainImgEl.src.replace(BASE_URL, '').replace(window.location.origin, '');
               updateWhatsApp(imgPath);
             });
           }
 
-          // Colors change (only for Colors)
           if (colorSelect) {
             colorSelect.addEventListener('change', () => {
-              // Extract path from src (remove origin if present)
               const imgPath = mainImgEl.src.replace(BASE_URL, '').replace(window.location.origin, '');
               updateWhatsApp(imgPath);
             });
           }
-        }
+        };
+
+        // Close modal function
         function closeProductModal() {
-          document.getElementById('productModal').classList.add('hidden');
+          const modal = document.getElementById('productModal');
+          modal.classList.add('hidden');
+          modal.classList.remove('grid');
           document.body.style.overflow = 'auto';
+          // Remove any open fullscreen gallery
+          const gallery = document.getElementById('fullscreenGalleryOverlay');
+          if (gallery) gallery.remove();
         }
 
-        // Init
-        (function init() {
-          setupEvents();
-          // No default filter active on load -> show all products
-          // ensure all buttons enabled and none visually active
-          document.querySelectorAll('aside .filter-btn, aside .exq-filter, .sheet .m-filter, .sheet .m-exq').forEach(b => {
-            b.disabled = false;
-            b.classList.remove('opacity-50', 'pointer-events-none');
+        // ===== FULLSCREEN IMAGE VIEWER =====
+        function setupFullscreenImageViewer(images, product) {
+          const viewAllBtn = document.getElementById('viewAllImagesBtn');
+          if (!viewAllBtn) return;
+
+          viewAllBtn.addEventListener('click', () => {
+            openFullscreenGallery(images, product);
           });
-        })();
+        }
+
+        function openFullscreenGallery(images, product) {
+          // Create fullscreen overlay
+          const overlay = document.createElement('div');
+          overlay.id = 'fullscreenGalleryOverlay';
+          overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 12px;
+            overflow-y: auto;
+            overflow-x: hidden;
+          `;
+
+          // Close button (ONLY closes gallery, NOT modal)
+          const closeBtn = document.createElement('button');
+          closeBtn.type = 'button';
+          closeBtn.innerHTML = '✕';
+          closeBtn.style.cssText = `
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+          `;
+          closeBtn.onmouseover = () => closeBtn.style.background = '#ddd';
+          closeBtn.onmouseout = () => closeBtn.style.background = '#fff';
+
+          // Header with image count
+          const header = document.createElement('div');
+          header.style.cssText = `
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 16px;
+            margin-top: 50px;
+            padding: 0 12px;
+          `;
+          header.innerHTML = `<h2 style="margin: 0; font-size: 18px; font-weight: bold;">${product.name}</h2><p style="margin: 4px 0 0 0; font-size: 14px; color: #aaa;">${images.length} images</p>`;
+
+          // Image grid container (let it expand naturally)
+          const gridContainer = document.createElement('div');
+          gridContainer.style.cssText = `
+            width: 100%;
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            padding: 0 12px 40px;
+            align-content: start;
+          `;
+
+          // Responsive grid for tablet
+          if (window.innerWidth < 1024) {
+            gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(140px, 1fr))';
+            gridContainer.style.gap = '12px';
+          }
+
+          // Responsive grid for mobile
+          if (window.innerWidth < 768) {
+            gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(100px, 1fr))';
+            gridContainer.style.gap = '10px';
+            gridContainer.style.padding = '0 8px 40px';
+          }
+
+          // Create image tiles
+          images.forEach((img, idx) => {
+            const tile = document.createElement('button');
+            tile.type = 'button';
+            tile.style.cssText = `
+              position: relative;
+              border: 2px solid #333;
+              border-radius: 8px;
+              overflow: hidden;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              background: #111;
+              aspect-ratio: 1;
+              padding: 0;
+              min-height: 0;
+              min-width: 0;
+              flex-shrink: 0;
+            `;
+            tile.onmouseover = () => {
+              tile.style.transform = 'scale(1.08)';
+              tile.style.boxShadow = '0 0 20px rgba(255,215,0,0.6)';
+              tile.style.borderColor = '#FFD700';
+            };
+            tile.onmouseout = () => {
+              tile.style.transform = 'scale(1)';
+              tile.style.boxShadow = 'none';
+              tile.style.borderColor = '#333';
+            };
+
+            // Image inside tile
+            const imgEl = document.createElement('img');
+            imgEl.src = img;
+            imgEl.alt = `${product.name} - Image ${idx + 1}`;
+            imgEl.style.cssText = `
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              display: block;
+            `;
+            imgEl.loading = 'lazy';
+            imgEl.onerror = () => imgEl.src = '/uploads/default.png';
+
+            // Image counter badge
+            const badge = document.createElement('span');
+            badge.textContent = `${idx + 1}/${images.length}`;
+            badge.style.cssText = `
+              position: absolute;
+              bottom: 4px;
+              right: 4px;
+              background: rgba(0,0,0,0.9);
+              color: #FFD700;
+              font-size: 11px;
+              font-weight: bold;
+              padding: 3px 6px;
+              border-radius: 4px;
+            `;
+
+            tile.appendChild(imgEl);
+            tile.appendChild(badge);
+
+            // Click to select and return to modal
+            tile.addEventListener('click', () => {
+              selectImageAndReturn(img, idx);
+            });
+
+            gridContainer.appendChild(tile);
+          });
+
+          overlay.appendChild(header);
+          overlay.appendChild(gridContainer);
+          overlay.appendChild(closeBtn);
+          document.body.appendChild(overlay);
+
+          // Prevent body scroll when overlay is open
+          document.body.style.overflow = 'hidden';
+
+          // Close function (only removes gallery overlay, NOT modal)
+          function closeGalleryOnly() {
+            overlay.remove();
+            document.body.style.overflow = 'auto';
+            document.removeEventListener('keydown', escapeHandler);
+          }
+
+          // Close on close button click (ONLY gallery)
+          closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeGalleryOnly();
+          });
+
+          // Close on backdrop click (only if clicking overlay, not content)
+          overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+              e.stopPropagation();
+              closeGalleryOnly();
+            }
+          });
+
+          // Close on Escape key (ONLY gallery)
+          const escapeHandler = (e) => {
+            if (e.key === 'Escape') {
+              closeGalleryOnly();
+            }
+          };
+          document.addEventListener('keydown', escapeHandler);
+
+          function selectImageAndReturn(selectedImg, selectedIdx) {
+            // Update main image in modal
+            const mainImgEl = document.getElementById('mainProductImage');
+            if (mainImgEl) {
+              mainImgEl.src = selectedImg;
+            }
+
+            // Update thumbnail highlighting
+            const thumbBtns = document.querySelectorAll('.thumbnail-btn');
+            thumbBtns.forEach((btn, btnIdx) => {
+              btn.classList.remove('border-2', 'border-[color:var(--gold)]');
+              btn.classList.add('border', 'border-gray-200');
+              if (btnIdx === selectedIdx) {
+                btn.classList.remove('border', 'border-gray-200');
+                btn.classList.add('border-2', 'border-[color:var(--gold)]');
+              }
+            });
+
+            // Close ONLY the fullscreen gallery, keep modal open
+            closeGalleryOnly();
+          }
+        }
+
+        // ===== SETUP EVENT LISTENERS ON DOM READY =====
+        function setupEvents() {
+          // Search
+          searchInput.addEventListener('input', (e) => {
+            state.search = e.target.value;
+            applyFilters(state.search);
+          });
+          // Sort
+          sortSelect.addEventListener('change', (e) => {
+            state.sort = e.target.value;
+            const sorted = applySort(currentDisplayedProducts);
+            renderProducts(sorted);
+          });
+
+          // Modal controls - ATTACH HERE
+          const closeModalBtn = document.getElementById('closeModal');
+          const xModalBtn = document.getElementById('xModal');
+
+          if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeProductModal);
+          }
+          if (xModalBtn) {
+            xModalBtn.addEventListener('click', closeProductModal);
+          }
+        }
+
+        // Call setupEvents when DOM is ready
+        document.addEventListener("DOMContentLoaded", () => {
+          setupEvents();  // <=== ADD THIS CALL
+          
+          // Apply initial sort
+          const initialProducts = applySort(PRODUCTS);
+          renderProducts(initialProducts);
+
+          // Check if product ID is in URL to open modal
+          const urlParams = new URLSearchParams(window.location.search);
+          const productId = urlParams.get('product');
+          if (productId) {
+            setTimeout(() => {
+              if (typeof window.openProductModal === 'function') {
+                window.openProductModal(productId);
+              } else {
+                setTimeout(() => {
+                  if (typeof window.openProductModal === 'function') {
+                    window.openProductModal(productId);
+                  }
+                }, 1000);
+              }
+            }, 800);
+          }
+          const nav = document.getElementById('navbar');
+          if (nav) {
+            window.addEventListener('scroll', () => {
+              if (window.scrollY > 10) {
+                nav.classList.add('nav-blur');
+              } else {
+                nav.classList.remove('nav-blur');
+              }
+            });
+          }
+        });
       </script>
       <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'982a742516c8a7ee',t:'MTc1ODQ2NzA1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
