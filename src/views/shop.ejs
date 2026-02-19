@@ -783,18 +783,22 @@
           const term = state.search.toLowerCase().trim();
           let products = [...PRODUCTS];
 
-          // Apply industry filter if set from URL
-          //deleted the code
-
-
-          // If All selected â†’ no jar/bottle filtering (case-insensitive check)
-          //deleted the code
-
           let filteredProducts = products.filter(p => {
 
-            /* ---------------- SEARCH FILTER ---------------- */
-            if (term && !p.name.toLowerCase().includes(term)) {
-              return false;
+            /* ---------------- SEARCH FILTER (name + description) ---------------- */
+            if (term) {
+              const name = (p.name || '').toLowerCase();
+              const description = (p.description || '').toLowerCase();
+              const hsnCode = (p.hsnCode || '').toLowerCase();
+              
+              // Search through name, description, and HSN code
+              const matches = name.includes(term) || 
+                              description.includes(term) || 
+                              hsnCode.includes(term);
+              
+              if (!matches) {
+                return false;
+              }
             }
 
             return true;

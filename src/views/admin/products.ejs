@@ -49,7 +49,7 @@
                                 <div class="form-row">
                                     <div class="form-group-inline">
                                         <label for="filterName">Product Name</label>
-                                        <input type="text" id="filterName" placeholder="Search by name...">
+                                        <input type="text" id="filterName" placeholder="Search by description...">
                                     </div>
                                     <div class="form-group-inline">
                                         <label for="filterStatus">Status</label>
@@ -175,10 +175,18 @@
             if (!productTableBody) return;
             
             let filteredProducts = PRODUCTS.filter(product => {
-                // Name filter (from search box or filter section)
+                // Name + Description filter (from search box or filter section)
                 const nameFilter = filters.name || searchTerm;
-                if (nameFilter && !product.name.toLowerCase().includes(nameFilter.toLowerCase())) {
-                    return false;
+                if (nameFilter) {
+                    const searchLower = nameFilter.toLowerCase();
+                    const nameMatch = product.name.toLowerCase().includes(searchLower);
+                    const descriptionMatch = product.description && product.description.toLowerCase().includes(searchLower);
+                    const hsnMatch = product.hsnCode && product.hsnCode.toLowerCase().includes(searchLower);
+                    
+                    // Must match at least one field
+                    if (!nameMatch && !descriptionMatch && !hsnMatch) {
+                        return false;
+                    }
                 }
                 
                 // category filter
