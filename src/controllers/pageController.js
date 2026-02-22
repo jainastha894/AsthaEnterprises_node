@@ -21,7 +21,7 @@ const renderHome = async (req, res) => {
     }).limit(3).sort({ updatedAt: -1 });
 
     // Get base URL for image links - use production domain
-    const baseUrl = process.env.BASE_URL || 'https://asthaenterprises.com';
+    const baseUrl = process.env.BASE_URL || 'https://asthaenterprises.shop';
 
     res.render("index", {
       seoData: seo.home,
@@ -30,7 +30,7 @@ const renderHome = async (req, res) => {
     });
   } catch (error) {
     console.error("Home page error:", error);
-    const baseUrl = process.env.BASE_URL || 'https://asthaenterprises.com';
+    const baseUrl = process.env.BASE_URL || 'https://asthaenterprises.shop';
     res.render("index", {
       seoData: seo.home,
       signatureProducts: [],
@@ -122,7 +122,7 @@ const renderShop = async (req, res) => {
       console.log(`Filtered ${filteredProducts.length} products for industry "${industry}"`);
     }
 
-    const baseUrl = process.env.BASE_URL || "https://asthaenterprises.com";
+    const baseUrl = process.env.BASE_URL || "https://asthaenterprises.shop";
 
     res.render("shop", {
       seoData: seo.shop,

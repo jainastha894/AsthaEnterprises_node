@@ -3,17 +3,17 @@
     "title": "Astha Enterprises - Best Fabrics in Shanti Mohalla, Gandhi Nagar",
     "description": "Astha Enterprises offers the best quality fabrics at reasonable prices in Shanti Mohalla, Gandhi Nagar. Wholesale and retail of cotton prints, rayon, jam cotton, and more.",
     "keywords": "Astha Enterprises, best fabrics in Shanti Mohalla, fabrics, cotton prints, rayon, jam cotton colors, bhaiya ji, wholesale fabric, retail fabric, Gandhi Nagar fabric market",
-    "canonical": "https://asthaenterprises.com/",
+    "canonical": "https://asthaenterprises.shop/",
     "ogTitle": "Astha Enterprises - Premium Fabrics in Shanti Mohalla",
     "ogDescription": "Discover premium fabrics at Astha Enterprises. We deal in wholesale and retail of all kinds of fabrics, colors, and prints including cotton, rayon, and more.",
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://asthaenterprises.com/#org",
+        "@id": "https://asthaenterprises.shop/#org",
         "name": "Astha Enterprises",
-        "url": "https://asthaenterprises.com/",
-        "logo": "https://asthaenterprises.com/logo.png",
+        "url": "https://asthaenterprises.shop/",
+        "logo": "https://asthaenterprises.shop/logo.png",
         "foundingDate": "2002",
         "description": "Best quality fabric business in Shanti Mohalla, Gandhi Nagar. Wholesale and retail of cotton, rayon, and designer fabrics.",
         "telephone": "+91-98189-26023",
@@ -32,15 +32,15 @@
           }
         ],
         "sameAs": [
-          "https://asthaenterprises.com/"
+          "https://asthaenterprises.shop/"
         ]
       },
       {
         "@type": "LocalBusiness",
-        "@id": "https://asthaenterprises.com/#local",
+        "@id": "https://asthaenterprises.shop/#local",
         "name": "Astha Enterprises - Best Fabric Shop in Shanti Mohalla",
-        "url": "https://asthaenterprises.com/",
-        "image": "https://asthaenterprises.com/images/home1.jpeg",
+        "url": "https://asthaenterprises.shop/",
+        "image": "https://asthaenterprises.shop/images/home1.jpeg",
         "telephone": "+91-98189-26023",
         "priceRange": "$",
         "address": {
@@ -63,28 +63,28 @@
           }
         ],
         "foundingDate": "2002",
-        "logo": "https://asthaenterprises.com/logo.png"
+        "logo": "https://asthaenterprises.shop/logo.png"
       },
       {
         "@type": "WebSite",
-        "@id": "https://asthaenterprises.com/#website",
+        "@id": "https://asthaenterprises.shop/#website",
         "name": "Astha Enterprises",
-        "url": "https://asthaenterprises.com/",
+        "url": "https://asthaenterprises.shop/",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://asthaenterprises.com/search?q={search_term_string}",
+          "target": "https://asthaenterprises.shop/search?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://asthaenterprises.com/#breadcrumbs",
+        "@id": "https://asthaenterprises.shop/#breadcrumbs",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://asthaenterprises.com/"
+            "item": "https://asthaenterprises.shop/"
           }
         ]
       }
@@ -94,17 +94,17 @@
     "title": "About Astha Enterprises | Premium Fabric Wholesaler in Delhi",
     "description": "Astha Enterprises has been serving the specialized fabric needs of Shanti Mohalla, Gandhi Nagar since 2002. Offering high-quality cotton, rayon, and designer prints.",
     "keywords": "Astha Enterprises history, fabric wholesaler Delhi, Shanti Mohalla fabric shop, best fabric supplier Gandhi Nagar",
-    "canonical": "https://asthaenterprises.com/about",
+    "canonical": "https://asthaenterprises.shop/about",
     "ogTitle": "About Astha Enterprises | Trusted Fabric Supplier Since 2002",
     "ogDescription": "Established in 2002, Astha Enterprises is a leading name in wholesale and retail fabrics in Shanti Mohalla, Gandhi Nagar.",
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://asthaenterprises.com/#org",
+        "@id": "https://asthaenterprises.shop/#org",
         "name": "Astha Enterprises",
-        "url": "https://asthaenterprises.com/",
-        "logo": "https://asthaenterprises.com/logo.png",
+        "url": "https://asthaenterprises.shop/",
+        "logo": "https://asthaenterprises.shop/logo.png",
         "foundingDate": "2002",
         "description": "Premier fabric supplier in Delhi NCR.",
         "telephone": "+91-98189-26023",
@@ -123,31 +123,31 @@
           }
         ],
         "sameAs": [
-          "https://asthaenterprises.com/"
+          "https://asthaenterprises.shop/"
         ]
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://asthaenterprises.com/about.html#breadcrumbs",
+        "@id": "https://asthaenterprises.shop/about.html#breadcrumbs",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://asthaenterprises.com/"
+            "item": "https://asthaenterprises.shop/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "About",
-            "item": "https://asthaenterprises.com/about"
+            "item": "https://asthaenterprises.shop/about"
           }
         ]
       },
       {
         "@type": "AboutPage",
-        "@id": "https://asthaenterprises.com/about.html#about",
-        "url": "https://asthaenterprises.com/about",
+        "@id": "https://asthaenterprises.shop/about.html#about",
+        "url": "https://asthaenterprises.shop/about",
         "name": "About Astha Enterprises",
         "description": "Information about Astha Enterprises, a leading fabric supplier in Shanti Mohalla."
       }
@@ -157,17 +157,17 @@
     "title": "Contact Astha Enterprises | Best Fabric Deals in Shanti Mohalla",
     "description": "Visit Astha Enterprises in Shanti Mohalla, Gandhi Nagar for the best wholesale and retail fabric deals. Contact us for bulk inquiries on cotton, rayon, and prints.",
     "keywords": "contact Astha Enterprises, fabric shop address Shanti Mohalla, wholesale fabric contact number Delhi",
-    "canonical": "https://asthaenterprises.com/contact",
+    "canonical": "https://asthaenterprises.shop/contact",
     "ogTitle": "Contact Astha Enterprises | Visit Us in Gandhi Nagar",
     "ogDescription": "Get in touch with Astha Enterprises for all your fabric needs. Located in the heart of Shanti Mohalla, Gandhi Nagar.",
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://asthaenterprises.com/#org",
+        "@id": "https://asthaenterprises.shop/#org",
         "name": "Astha Enterprises",
-        "url": "https://asthaenterprises.com/",
-        "logo": "https://asthaenterprises.com/logo.png",
+        "url": "https://asthaenterprises.shop/",
+        "logo": "https://asthaenterprises.shop/logo.png",
         "telephone": "+91-98189-26023",
         "address": {
           "@type": "PostalAddress",
@@ -180,26 +180,26 @@
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://asthaenterprises.com/contact.html#breadcrumbs",
+        "@id": "https://asthaenterprises.shop/contact.html#breadcrumbs",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://asthaenterprises.com/"
+            "item": "https://asthaenterprises.shop/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Contact",
-            "item": "https://asthaenterprises.com/contact"
+            "item": "https://asthaenterprises.shop/contact"
           }
         ]
       },
       {
         "@type": "ContactPage",
-        "@id": "https://asthaenterprises.com/contact.html#contact",
-        "url": "https://asthaenterprises.com/contact",
+        "@id": "https://asthaenterprises.shop/contact.html#contact",
+        "url": "https://asthaenterprises.shop/contact",
         "name": "Contact Astha Enterprises",
         "description": "Contact details for Astha Enterprises fabric business."
       }
@@ -209,33 +209,33 @@
     "title": "Shop Premium Fabrics | Cotton, Rayon, Prints - Astha Enterprises",
     "description": "Explore our wide collection of fabrics including cotton prints, rayon, jam cotton colors, and designer fabrics. Wholesale and retail available in Shanti Mohalla.",
     "keywords": "buy fabrics online, cotton prints, rayon fabric, jam cotton, wholesale fabric shop, retail fabric store, Astha Enterprises shop",
-    "canonical": "https://asthaenterprises.com/shop",
+    "canonical": "https://asthaenterprises.shop/shop",
     "ogTitle": "Shop Fabrics at Astha Enterprises | Wholesale & Retail",
     "ogDescription": "Browse our latest collection of high-quality fabrics. Cotton, Rayon, Silk, and more available at best prices.",
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "BreadcrumbList",
-        "@id": "https://asthaenterprises.com/shop#breadcrumbs",
+        "@id": "https://asthaenterprises.shop/shop#breadcrumbs",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://asthaenterprises.com/"
+            "item": "https://asthaenterprises.shop/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Shop",
-            "item": "https://asthaenterprises.com/shop"
+            "item": "https://asthaenterprises.shop/shop"
           }
         ]
       },
       {
         "@type": "WebPage",
-        "@id": "https://asthaenterprises.com/shop#page",
-        "url": "https://asthaenterprises.com/shop",
+        "@id": "https://asthaenterprises.shop/shop#page",
+        "url": "https://asthaenterprises.shop/shop",
         "name": "Shop Fabrics",
         "description": "Shop the best quality fabrics at Astha Enterprises."
       }

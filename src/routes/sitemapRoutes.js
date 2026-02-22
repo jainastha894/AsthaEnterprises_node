@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const baseUrl = process.env.BASE_URL || "https://asthaenterprises.com";
+const baseUrl = process.env.BASE_URL || "https://asthaenterprises.shop";
 const urls = ["/", "/shop", "/about", "/contact", "/privacy", "/terms", "/administrator"];
 
 router.get("/sitemap.xml", (_req, res) => {
