@@ -1,35 +1,12 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true
-    },
-
-    description: {
-      type: String,
-      required: true
-    },
-
-    hsnCode: {
-      type: String,
-      required: true
-    },
-
-    images: {
-      type: [String],
-      default: []
-    },
-
-    //  Dynamic units stored here
-    units: {
-      type: Map,
-      of: [String],
-      default: {}
-    },
-
-    //  All booleans default false
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    hsnCode: { type: String, required: true },
+    images: { type: [String], default: [] },
+    units: { type: Map, of: [String], default: {} },
     featured: { type: Boolean, default: false },
     topRated: { type: Boolean, default: false },
     bestSeller: { type: Boolean, default: false },
@@ -41,4 +18,4 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Product", productSchema);
+module.exports = mongoose.model("Product", productSchema);

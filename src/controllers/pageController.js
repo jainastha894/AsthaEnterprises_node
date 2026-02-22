@@ -1,8 +1,8 @@
-import path from "path";
-import Product from "../models/product.js";
-import Lead from "../models/lead.js";
-import ProductEnquiry from "../models/productEnquiry.js";
-import fs from "fs";
+const path = require("path");
+const Product = require("../models/product.js");
+const Lead = require("../models/lead.js");
+const ProductEnquiry = require("../models/productEnquiry.js");
+const fs = require("fs");
 
 // Load SEO JSON once
 const seoPath = path.join(process.cwd(), "src", "config", "seo.json");
@@ -12,18 +12,18 @@ const seo = JSON.parse(fs.readFileSync(seoPath, "utf8"));
 const unitsPath = path.join(process.cwd(), "src/config/units.json");
 const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
 
-export const renderHome = async (req, res) => {
+const renderHome = async (req, res) => {
   try {
     // Get signature products (max 3)
-    const signatureProducts = await Product.find({ 
-      active: true, 
-      signature: true 
+    const signatureProducts = await Product.find({
+      active: true,
+      signature: true
     }).limit(3).sort({ updatedAt: -1 });
-    
+
     // Get base URL for image links - use production domain
     const baseUrl = process.env.BASE_URL || 'https://asthaenterprises.com';
-    
-    res.render("index", { 
+
+    res.render("index", {
       seoData: seo.home,
       signatureProducts: signatureProducts || [],
       baseUrl
@@ -31,7 +31,7 @@ export const renderHome = async (req, res) => {
   } catch (error) {
     console.error("Home page error:", error);
     const baseUrl = process.env.BASE_URL || 'https://asthaenterprises.com';
-    res.render("index", { 
+    res.render("index", {
       seoData: seo.home,
       signatureProducts: [],
       baseUrl
@@ -39,23 +39,23 @@ export const renderHome = async (req, res) => {
   }
 };
 
-export const renderAbout = (req, res) => {
+const renderAbout = (req, res) => {
   res.render("about", { seoData: seo.about });
 };
 
-export const renderContact = (req, res) => {
+const renderContact = (req, res) => {
   res.render("contact", { seoData: seo.contact });
 };
 
-export const submitContactForm = async (req, res) => {
+const submitContactForm = async (req, res) => {
   try {
     const { firstName, lastName, email, phone, subject, message } = req.body;
 
     // Validate required fields
     if (!firstName || !lastName || !email || !subject || !message) {
-      return res.status(400).json({ 
-        success: false, 
-        message: "All required fields must be filled" 
+      return res.status(400).json({
+        success: false,
+        message: "All required fields must be filled"
       });
     }
 
@@ -73,20 +73,20 @@ export const submitContactForm = async (req, res) => {
     await lead.save();
     console.log('✅ New lead created:', lead._id);
 
-    res.json({ 
-      success: true, 
-      message: "Thank you for contacting us! We'll get back to you soon." 
+    res.json({
+      success: true,
+      message: "Thank you for contacting us! We'll get back to you soon."
     });
   } catch (error) {
     console.error("Error submitting contact form:", error);
-    res.status(500).json({ 
-      success: false, 
-      message: "Error submitting form. Please try again." 
+    res.status(500).json({
+      success: false,
+      message: "Error submitting form. Please try again."
     });
   }
 };
 
-export const renderShop = async (req, res) => {
+const renderShop = async (req, res) => {
   try {
     const { industry } = req.query;
 
@@ -139,15 +139,15 @@ export const renderShop = async (req, res) => {
 };
 
 
-export const renderPrivacy = (req, res) => {
+const renderPrivacy = (req, res) => {
   res.render("privacy");
 };
 
-export const renderTerms = (req, res) => {
+const renderTerms = (req, res) => {
   res.render("terms");
 };
 
-export const trackProductEnquiry = async (req, res) => {
+const trackProductEnquiry = async (req, res) => {
   try {
     const { productId, productName, industry, source } = req.body;
 
@@ -166,4 +166,15 @@ export const trackProductEnquiry = async (req, res) => {
     console.error("Product enquiry tracking error:", error);
     res.status(500).json({ success: false });
   }
+};
+
+module.exports = {
+  renderHome,
+  renderAbout,
+  renderContact,
+  submitContactForm,
+  renderShop,
+  renderPrivacy,
+  renderTerms,
+  trackProductEnquiry,
 };

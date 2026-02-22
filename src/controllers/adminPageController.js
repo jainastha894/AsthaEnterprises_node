@@ -1,23 +1,23 @@
-import fs from "fs";
-import path from "path";
-import Product from "../models/product.js";
-import Admin from "../models/admin.js";
-import Lead from "../models/lead.js";
-import ProductEnquiry from "../models/productEnquiry.js";
-import passport from "passport";
-import bcrypt from "bcryptjs";
+const fs = require("fs");
+const path = require("path");
+const Product = require("../models/product.js");
+const Admin = require("../models/admin.js");
+const Lead = require("../models/lead.js");
+const ProductEnquiry = require("../models/productEnquiry.js");
+const passport = require("passport");
+const bcrypt = require("bcryptjs");
 
 const unitsPath = path.join(process.cwd(), "src/config/units.json");
 
-export const unitsPage = (req, res) => {
+const unitsPage = (req, res) => {
   const unitsPath = path.join(process.cwd(), "src/config/units.json");
   const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
-    res.render("admin/units", {
+  res.render("admin/units", {
     units: unitsData
   });
 };
 
-export const addProductPage = (req, res) => {
+const addProductPage = (req, res) => {
   const unitsPath = path.join(process.cwd(), "src/config/units.json");
   const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
   res.render("admin/add-product", {
@@ -28,12 +28,12 @@ export const addProductPage = (req, res) => {
   });
 };
 
-export const addProduct = async (req, res) => {
+const addProduct = async (req, res) => {
   try {
     console.log('=== Add Product Request ===');
     console.log('Body:', JSON.stringify(req.body, null, 2));
     console.log('Files:', req.files ? req.files.map(f => f.filename) : 'No files');
-    
+
     const unitsPath = path.join(process.cwd(), "src/config/units.json");
     const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
 
@@ -65,8 +65,8 @@ export const addProduct = async (req, res) => {
         } else {
           // Multi-select checkboxes (sizeList, colorList, fragranceList, etc.)
           const values = Array.isArray(req.body[unitKey])
-          ? req.body[unitKey]
-          : [req.body[unitKey]];
+            ? req.body[unitKey]
+            : [req.body[unitKey]];
           // Filter out empty values
           const filteredValues = values.filter(val => val && val.trim() !== '');
           if (filteredValues.length > 0) {
@@ -117,7 +117,7 @@ export const addProduct = async (req, res) => {
   }
 };
 
-export const addUnit = (req, res) => {
+const addUnit = (req, res) => {
   const unitsPath = path.join(process.cwd(), "src/config/units.json");
   const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
 
@@ -131,7 +131,7 @@ export const addUnit = (req, res) => {
   res.redirect("/admin/units");
 };
 
-export const removeUnit = (req, res) => {
+const removeUnit = (req, res) => {
   const unitsPath = path.join(process.cwd(), "src/config/units.json");
   const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
 
@@ -151,27 +151,27 @@ export const removeUnit = (req, res) => {
   res.redirect("/admin/units");
 };
 
-export const loginPage = (req, res) => {
+const loginPage = (req, res) => {
   res.render("admin/login");
 };
 
-export const dashboardPage = async(req, res) => {
+const dashboardPage = async (req, res) => {
   try {
     let totalproducts = await Product.countDocuments();
-    let featuredproducts = await Product.countDocuments({featured:true});
-    let outofstockproducts = await Product.countDocuments({outofstock:true});
-    let activeproducts = await Product.countDocuments({active:true});
-    
+    let featuredproducts = await Product.countDocuments({ featured: true });
+    let outofstockproducts = await Product.countDocuments({ outofstock: true });
+    let activeproducts = await Product.countDocuments({ active: true });
+
     // Lead statistics
     let totalLeads = await Lead.countDocuments();
-    let newLeads = await Lead.countDocuments({status: "new"});
-    let contactedLeads = await Lead.countDocuments({status: "contacted"});
-    let inProgressLeads = await Lead.countDocuments({status: "in_progress"});
-    let resolvedLeads = await Lead.countDocuments({status: "resolved"});
+    let newLeads = await Lead.countDocuments({ status: "new" });
+    let contactedLeads = await Lead.countDocuments({ status: "contacted" });
+    let inProgressLeads = await Lead.countDocuments({ status: "in_progress" });
+    let resolvedLeads = await Lead.countDocuments({ status: "resolved" });
 
     // Product Enquiry statistics
     let totalEnquiries = await ProductEnquiry.countDocuments();
-    
+
     // Top query generated product
     const topProduct = await ProductEnquiry.aggregate([
       {
@@ -210,14 +210,14 @@ export const dashboardPage = async(req, res) => {
   }
 };
 
-export const productListPage = async (req, res) => {
+const productListPage = async (req, res) => {
   try {
-    
-  const unitsPath = path.join(process.cwd(), "src/config/units.json");
-  const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
-  console.log('ProductListPage - Fetching products from database...');
 
-  const products = await Product.find().sort({ createdAt: -1 });
+    const unitsPath = path.join(process.cwd(), "src/config/units.json");
+    const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
+    console.log('ProductListPage - Fetching products from database...');
+
+    const products = await Product.find().sort({ createdAt: -1 });
     // Convert Mongoose documents to plain objects for JSON serialization
     // Handle Map type units by converting to plain object
     const productsArray = products.map(p => {
@@ -236,14 +236,14 @@ export const productListPage = async (req, res) => {
   }
 };
 
-export const profilePage = async(req, res) => {
+const profilePage = async (req, res) => {
   try {
     let totalproducts = await Product.countDocuments();
-    let activeproducts = await Product.countDocuments({active:true});
+    let activeproducts = await Product.countDocuments({ active: true });
 
     // Get admin data
     const admin = await Admin.findOne({ username: req.user?.username || "AsthaAdmin" });
-    
+
     res.render("admin/profile", {
       totalproducts,
       activeproducts,
@@ -255,11 +255,11 @@ export const profilePage = async(req, res) => {
   }
 };
 
-export const profileSettingsPage = async (req, res) => {
+const profileSettingsPage = async (req, res) => {
   try {
     // Get admin data
     const admin = await Admin.findOne({ username: req.user?.username || "AsthaAdmin" });
-    
+
     res.render("admin/profileSetting", {
       admin: admin || null
     });
@@ -269,11 +269,11 @@ export const profileSettingsPage = async (req, res) => {
   }
 };
 
-export const updateProfile = async (req, res) => {
+const updateProfile = async (req, res) => {
   try {
     const { fullName, email, phone, bio } = req.body;
     let username = "AsthaAdmin";
-    
+
     // Try to get username from user object
     if (req.user) {
       if (typeof req.user === 'object' && req.user.username) {
@@ -286,9 +286,9 @@ export const updateProfile = async (req, res) => {
         }
       }
     }
-    
+
     let admin = await Admin.findOne({ username });
-    
+
     if (!admin) {
       // Create admin if doesn't exist
       const hashedPassword = await bcrypt.hash("atulparamjain", 10);
@@ -309,7 +309,7 @@ export const updateProfile = async (req, res) => {
       // Role is not updated - it remains unchanged
       if (bio !== undefined) admin.bio = bio;
     }
-    
+
     // Handle profile picture upload
     if (req.file) {
       // Delete old profile picture if exists
@@ -321,9 +321,9 @@ export const updateProfile = async (req, res) => {
       }
       admin.profilePic = `/uploads/${req.file.filename}`;
     }
-    
+
     await admin.save();
-    
+
     res.json({ success: true, message: "Profile updated successfully", admin });
   } catch (error) {
     console.error("Update profile error:", error);
@@ -331,10 +331,10 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-export const removeProfilePic = async (req, res) => {
+const removeProfilePic = async (req, res) => {
   try {
     let username = "AsthaAdmin";
-    
+
     // Try to get username from user object
     if (req.user) {
       if (typeof req.user === 'object' && req.user.username) {
@@ -347,13 +347,13 @@ export const removeProfilePic = async (req, res) => {
         }
       }
     }
-    
+
     const admin = await Admin.findOne({ username });
-    
+
     if (!admin) {
       return res.status(404).json({ success: false, message: "Admin not found" });
     }
-    
+
     // Delete profile picture file if exists
     if (admin.profilePic) {
       const picPath = path.join(process.cwd(), "src", "public", admin.profilePic);
@@ -361,10 +361,10 @@ export const removeProfilePic = async (req, res) => {
         fs.unlinkSync(picPath);
       }
     }
-    
+
     admin.profilePic = null;
     await admin.save();
-    
+
     res.json({ success: true, message: "Profile picture removed successfully", admin });
   } catch (error) {
     console.error("Remove profile pic error:", error);
@@ -372,11 +372,11 @@ export const removeProfilePic = async (req, res) => {
   }
 };
 
-export const changePassword = async (req, res) => {
+const changePassword = async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
     let username = "AsthaAdmin";
-    
+
     // Try to get username from user object
     if (req.user) {
       if (typeof req.user === 'object' && req.user.username) {
@@ -389,23 +389,23 @@ export const changePassword = async (req, res) => {
         }
       }
     }
-    
+
     const admin = await Admin.findOne({ username });
-    
+
     if (!admin) {
       return res.status(404).json({ success: false, message: "Admin not found" });
     }
-    
+
     // Verify current password
     const isMatch = await admin.comparePassword(currentPassword);
     if (!isMatch) {
       return res.status(400).json({ success: false, message: "Current password is incorrect" });
     }
-    
+
     // Update password
     admin.password = newPassword; // Will be hashed by pre-save hook
     await admin.save();
-    
+
     res.json({ success: true, message: "Password changed successfully" });
   } catch (error) {
     console.error("Change password error:", error);
@@ -413,7 +413,7 @@ export const changePassword = async (req, res) => {
   }
 };
 
-export const catalogPage = async (req, res) => {
+const catalogPage = async (req, res) => {
   try {
     const unitsPath = path.join(process.cwd(), "src/config/units.json");
     const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
@@ -428,7 +428,7 @@ export const catalogPage = async (req, res) => {
   }
 };
 
-export const editProductPage = async (req, res) => {
+const editProductPage = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findById(id);
@@ -437,15 +437,15 @@ export const editProductPage = async (req, res) => {
     }
     const unitsPath = path.join(process.cwd(), "src/config/units.json");
     const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
-    
+
     // Convert Mongoose document to plain object for EJS template
     const productObj = product.toObject ? product.toObject() : product;
-    
+
     // Convert Map to plain object if units is a Map
     if (productObj.units && productObj.units instanceof Map) {
       productObj.units = Object.fromEntries(productObj.units);
     }
-    
+
     // Ensure all unit fields are arrays for consistent handling
     if (productObj.units) {
       for (const key in productObj.units) {
@@ -454,10 +454,10 @@ export const editProductPage = async (req, res) => {
         }
       }
     }
-    
+
     console.log('Edit product page - Product ID:', id);
     console.log('Product units:', JSON.stringify(productObj.units, null, 2));
-    
+
     res.render("admin/add-product", {
       product: productObj,
       units: unitsData,
@@ -470,19 +470,19 @@ export const editProductPage = async (req, res) => {
   }
 };
 
-export const updateProduct = async (req, res) => {
+const updateProduct = async (req, res) => {
   try {
     console.log('=== Update Product Request ===');
     console.log('Product ID:', req.params.id);
     console.log('Body:', JSON.stringify(req.body, null, 2));
     console.log('Files:', req.files ? req.files.map(f => f.filename) : 'No files');
-    
+
     const { id } = req.params;
     const unitsPath = path.join(process.cwd(), "src/config/units.json");
     const unitsData = JSON.parse(fs.readFileSync(unitsPath, "utf-8"));
 
     const { productName, description, hsnCode, imagesToRemove } = req.body;
-    
+
     console.log('Updating product hsn code:', hsnCode);
 
     // Get existing product
@@ -493,7 +493,7 @@ export const updateProduct = async (req, res) => {
 
     // Handle images - start with existing images
     let imagePaths = existingProduct.images || [];
-    
+
     // Remove images that were marked for removal
     if (imagesToRemove) {
       try {
@@ -510,7 +510,7 @@ export const updateProduct = async (req, res) => {
               }
             }
           });
-          
+
           // Remove from imagePaths array
           imagePaths = imagePaths.filter(img => !imagesToRemoveArray.includes(img));
         }
@@ -518,7 +518,7 @@ export const updateProduct = async (req, res) => {
         console.error("Error parsing imagesToRemove:", parseErr);
       }
     }
-    
+
     // Add new images if uploaded
     if (req.files && req.files.length > 0) {
       const newImagePaths = req.files.map(file => `/uploads/${file.filename}`);
@@ -527,7 +527,7 @@ export const updateProduct = async (req, res) => {
 
     // Dynamic units - build from req.body (capture ALL unit fields)
     const selectedUnits = {};
-    
+
     // Process all unit types from unitsData
     for (const unitKey in unitsData) {
       if (unitKey === 'industryList') {
@@ -580,9 +580,9 @@ export const updateProduct = async (req, res) => {
 
     console.log('Selected units:', JSON.stringify(selectedUnits, null, 2));
     console.log('Attempting to update product in database...');
-    
+
     const updatedProduct = await Product.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
-    
+
     if (!updatedProduct) {
       console.error('Product not found with ID:', id);
       return res.status(404).send("Product not found");
@@ -604,7 +604,7 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -643,7 +643,7 @@ export const deleteProduct = async (req, res) => {
 };
 
 
-export const toggleActive = async (req, res) => {
+const toggleActive = async (req, res) => {
   try {
     const { id } = req.params;
     const { active } = req.body;
@@ -658,7 +658,7 @@ export const toggleActive = async (req, res) => {
   }
 };
 
-export const toggleStock = async (req, res) => {
+const toggleStock = async (req, res) => {
   try {
     const { id } = req.params;
     const { outofstock } = req.body;
@@ -673,37 +673,37 @@ export const toggleStock = async (req, res) => {
   }
 };
 
-export const toggleSignature = async (req, res) => {
+const toggleSignature = async (req, res) => {
   try {
     const { id } = req.params;
     const { signature } = req.body;
-    
+
     // If trying to add signature, check if we already have 3
     if (signature) {
       const signatureCount = await Product.countDocuments({ signature: true });
       if (signatureCount >= 3) {
-        return res.status(400).json({ 
-          success: false, 
-          message: "Maximum 3 signature products allowed. Please remove a signature product first." 
+        return res.status(400).json({
+          success: false,
+          message: "Maximum 3 signature products allowed. Please remove a signature product first."
         });
       }
     }
-    
+
     const product = await Product.findByIdAndUpdate(id, { signature }, { new: true });
     if (!product) {
       return res.status(404).json({ success: false, message: "Product not found" });
     }
-    res.json({ 
-      success: true, 
-      message: `Product ${signature ? 'added to' : 'removed from'} signature collection`, 
-      product 
+    res.json({
+      success: true,
+      message: `Product ${signature ? 'added to' : 'removed from'} signature collection`,
+      product
     });
   } catch (error) {
     console.error("Toggle signature error:", error);
     res.status(500).json({ success: false, message: "Error updating signature status" });
   }
 };
-export const adminLogin = (req, res, next) => {
+const adminLogin = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
@@ -719,28 +719,28 @@ export const adminLogin = (req, res, next) => {
     });
   })(req, res, next);
 };
-export const adminLogout = (req, res) => {
+const adminLogout = (req, res) => {
   req.logout(() => {
     res.redirect("/admin");
   });
 };
 
 // Lead Management Controllers
-export const leadListPage = async (req, res) => {
+const leadListPage = async (req, res) => {
   try {
     // Auto-update lead statuses based on time
     const now = new Date();
     const fiveHoursAgo = new Date(now.getTime() - 5 * 60 * 60 * 1000); // 5 hours ago
-    
+
     // Update contacted leads to in_progress if contacted more than 5 hours ago
     // Resolution must be done manually by admin
     await Lead.updateMany(
-      { 
+      {
         status: 'contacted',
         contactedAt: { $exists: true, $lte: fiveHoursAgo }
       },
-      { 
-        $set: { 
+      {
+        $set: {
           status: 'in_progress',
           inProgressAt: new Date()
         }
@@ -748,7 +748,7 @@ export const leadListPage = async (req, res) => {
     );
 
     const { status, subject, search, sortBy = 'createdAt', sortOrder = 'desc' } = req.query;
-    
+
     // Build filter query
     let filter = {};
     if (status && status !== 'all') {
@@ -811,11 +811,11 @@ export const leadListPage = async (req, res) => {
   }
 };
 
-export const leadDetailPage = async (req, res) => {
+const leadDetailPage = async (req, res) => {
   try {
     const { id } = req.params;
     const lead = await Lead.findById(id);
-    
+
     if (!lead) {
       return res.status(404).send("Lead not found");
     }
@@ -829,14 +829,14 @@ export const leadDetailPage = async (req, res) => {
   }
 };
 
-export const updateLeadStatus = async (req, res) => {
+const updateLeadStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status, notes } = req.body;
 
     const updateData = { status };
     const now = new Date();
-    
+
     // Set timestamps based on status
     if (status === 'contacted') {
       updateData.contactedAt = now;
@@ -858,13 +858,13 @@ export const updateLeadStatus = async (req, res) => {
         if (!lead.inProgressAt) updateData.inProgressAt = now;
       }
     }
-    
+
     if (notes !== undefined) {
       updateData.notes = notes;
     }
 
     const lead = await Lead.findByIdAndUpdate(id, updateData, { new: true });
-    
+
     if (!lead) {
       return res.status(404).json({ success: false, message: "Lead not found" });
     }
@@ -876,15 +876,15 @@ export const updateLeadStatus = async (req, res) => {
   }
 };
 
-export const deleteLead = async (req, res) => {
+const deleteLead = async (req, res) => {
   try {
     const { id } = req.params;
     const lead = await Lead.findByIdAndDelete(id);
-    
+
     if (!lead) {
       return res.status(404).json({ success: false, message: "Lead not found" });
     }
-    
+
     res.json({ success: true, message: "Lead deleted successfully" });
   } catch (error) {
     console.error("Delete lead error:", error);
@@ -893,10 +893,10 @@ export const deleteLead = async (req, res) => {
 };
 
 // Product Enquiries Controllers
-export const productEnquiriesPage = async (req, res) => {
+const productEnquiriesPage = async (req, res) => {
   try {
     const { search, sortBy = 'clicks', sortOrder = 'desc' } = req.query;
-    
+
     // Aggregate enquiries by product
     let matchStage = {};
     if (search) {
@@ -919,7 +919,7 @@ export const productEnquiriesPage = async (req, res) => {
         }
       },
       {
-        $sort: sortBy === 'name' 
+        $sort: sortBy === 'name'
           ? { productName: sortOrder === 'asc' ? 1 : -1 }
           : { clicks: sortOrder === 'asc' ? 1 : -1 }
       }
@@ -937,4 +937,34 @@ export const productEnquiriesPage = async (req, res) => {
     console.error("Product enquiries page error:", error);
     res.status(500).send("Error loading product enquiries");
   }
+};
+
+module.exports = {
+  unitsPage,
+  addProductPage,
+  addProduct,
+  addUnit,
+  removeUnit,
+  loginPage,
+  dashboardPage,
+  productListPage,
+  profilePage,
+  profileSettingsPage,
+  updateProfile,
+  removeProfilePic,
+  changePassword,
+  catalogPage,
+  editProductPage,
+  updateProduct,
+  deleteProduct,
+  toggleActive,
+  toggleStock,
+  toggleSignature,
+  adminLogin,
+  adminLogout,
+  leadListPage,
+  leadDetailPage,
+  updateLeadStatus,
+  deleteLead,
+  productEnquiriesPage,
 };

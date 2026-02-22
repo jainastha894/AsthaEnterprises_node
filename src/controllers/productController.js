@@ -1,6 +1,8 @@
-import Product from "../models/product.js";
+const Product = require("../models/product.js");
 
 
-export const getAllProducts = async () => {
+const getAllProducts = async () => {
   return await Product.find();
 };
+
+module.exports = { getAllProducts };

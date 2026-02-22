@@ -1,6 +1,6 @@
-import Admin from "../models/admin.js";
+const Admin = require("../models/admin.js");
 
-export const addAdminData = async (req, res, next) => {
+const addAdminData = async (req, res, next) => {
   try {
     // Since login is now hardcoded, req.user is just { username: 'AsthaAdmin' }
     // Try to find admin by username from database (for profile data)
@@ -44,3 +44,4 @@ export const addAdminData = async (req, res, next) => {
   next();
 };
 
+module.exports = { addAdminData };

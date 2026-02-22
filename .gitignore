@@ -40,3 +40,5 @@ coverage/
 
 .env
 /public/uploads/
+
+/zip

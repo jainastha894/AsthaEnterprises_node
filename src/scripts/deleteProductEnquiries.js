@@ -1,11 +1,7 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
-import ProductEnquiry from "../models/productEnquiry.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const path = require("path");
+const ProductEnquiry = require("../models/productEnquiry.js");
 
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
@@ -13,11 +9,9 @@ const MONGODB_URI = process.env.MONGOURL || process.env.MONGODB_URI || "mongodb:
 
 async function deleteAllProductEnquiries() {
   try {
-    // Connect to MongoDB
     await mongoose.connect(MONGODB_URI);
     console.log("Connected to MongoDB");
 
-    // Count existing enquiries
     const countBefore = await ProductEnquiry.countDocuments();
     console.log(`\n=== Found ${countBefore} product enquiries ===`);
 
@@ -27,11 +21,9 @@ async function deleteAllProductEnquiries() {
       process.exit(0);
     }
 
-    // Delete all product enquiries
     const result = await ProductEnquiry.deleteMany({});
     console.log(`\n✅ Successfully deleted ${result.deletedCount} product enquiries`);
 
-    // Verify deletion
     const countAfter = await ProductEnquiry.countDocuments();
     console.log(`\n=== Verification: ${countAfter} product enquiries remaining ===`);
 

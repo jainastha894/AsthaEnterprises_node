@@ -1,16 +1,15 @@
-import dotenv from "dotenv";
-import express from "express";
-import session from "express-session";
-import mongoose from "mongoose";
-import passport from "passport";
-import path from "path";
-import { fileURLToPath } from "url";
-import { randomUUID } from "crypto";
-import { passportConfig } from "./config/passportConfig.js";
-import adminRoutes from "./routes/adminRoutes.js";
-import pageRoutes from "./routes/pageRoutes.js";
-import { sitemapRouter } from "./routes/sitemapRoutes.js";
-import MongoStore from "connect-mongo";
+const dotenv = require("dotenv");
+const express = require("express");
+const session = require("express-session");
+const mongoose = require("mongoose");
+const passport = require("passport");
+const path = require("path");
+const { randomUUID } = require("crypto");
+const { passportConfig } = require("./config/passportConfig.js");
+const adminRoutes = require("./routes/adminRoutes.js");
+const pageRoutes = require("./routes/pageRoutes.js");
+const { sitemapRouter } = require("./routes/sitemapRoutes.js");
+const MongoStore = require("connect-mongo").default;
 
 dotenv.config({
   path: path.resolve(process.cwd(), ".env"),
@@ -52,11 +51,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passportConfig();
-
-// Fix __dirname for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 
 // View engine
 app.set("view engine", "ejs");
@@ -129,4 +123,4 @@ app.listen(PORT, () =>
   console.log(`Server running at http://localhost:${PORT}`)
 );
 
-export default app;
+module.exports = app;
